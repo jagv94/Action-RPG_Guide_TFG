@@ -1,23 +1,20 @@
 using UnityEngine;
 using UnityEngine.Networking;
-using System.Collections;
 using System;
+using System.Collections;
 
-public class FirebaseRestClient : MonoBehaviour
+public class FirebaseDataHandler : MonoBehaviour, IFirebaseService
 {
-    private static FirebaseRestClient instance;
-    private const string DATABASE_URL = "https://tfg-vr-2024-25-default-rtdb.europe-west1.firebasedatabase.app/";
+    private static FirebaseDataHandler instance;
+    public static FirebaseDataHandler Instance => instance;
 
-    /**
-     * Permite obtener una instancia global de FirebaseRestClient.
-     */
-    public static FirebaseRestClient Instance { get; private set; }
+    private string databaseUrl;
 
     void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -26,11 +23,11 @@ public class FirebaseRestClient : MonoBehaviour
         }
     }
 
-    /**
-     * Envía datos a Firebase Realtime Database.
-     * @param path Ruta en la base de datos (por ejemplo, "userEvents.json").
-     * @param jsonData Datos a enviar en formato JSON.
-     */
+    private void Start()
+    {
+        databaseUrl = FirebaseManager.Instance.DatabaseURL;
+    }
+
     public void PostData(string path, string jsonData, Action<bool> callback)
     {
         if (string.IsNullOrEmpty(path) || string.IsNullOrEmpty(jsonData))
@@ -45,7 +42,7 @@ public class FirebaseRestClient : MonoBehaviour
 
     private IEnumerator PostDataCoroutine(string path, string jsonData, Action<bool> callback)
     {
-        string url = DATABASE_URL + path;
+        string url = databaseUrl + path;
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
 
         UnityWebRequest request = new UnityWebRequest(url, "POST");
@@ -68,10 +65,6 @@ public class FirebaseRestClient : MonoBehaviour
         }
     }
 
-    /**
-     * Lee datos de Firebase Realtime Database.
-     * @param path Ruta en la base de datos (por ejemplo, "userEvents.json").
-     */
     public void GetData(string path, Action<string> callback)
     {
         StartCoroutine(GetDataCoroutine(path, callback));
@@ -79,7 +72,7 @@ public class FirebaseRestClient : MonoBehaviour
 
     private IEnumerator GetDataCoroutine(string path, Action<string> callback)
     {
-        string url = DATABASE_URL + path;
+        string url = databaseUrl + path;
         UnityWebRequest request = UnityWebRequest.Get(url);
 
         yield return request.SendWebRequest();
