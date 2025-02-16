@@ -103,15 +103,11 @@ public class DataUploader : MonoBehaviour
         return await taskCompletionSource.Task;
     }
 
-    private void OnApplicationQuit()
-    {
-        UploadData();
-    }
-
     private void OnApplicationPause(bool pauseStatus)
     {
         if (pauseStatus)
         {
+            UserEventLogger.Instance.LogEvent("app_paused", "application", 0f);
             UploadData();
         }
     }

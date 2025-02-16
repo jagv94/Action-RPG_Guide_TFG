@@ -68,7 +68,7 @@ public class UserEventLogger : MonoBehaviour
             missedClicks: 0, // Podría actualizarse con lógica adicional
             headMovement: PerformanceMonitor.Instance.HeadMovement,
             gazeTarget: string.IsNullOrEmpty(targetObject) ? "AirClick" : targetObject,
-            teleportUsage: 0, // Debe ser actualizado en otro módulo
+            teleportUsage: TeleportTracker.Instance.TeleportCount, // Debe ser actualizado en otro módulo
             fps: PerformanceMonitor.Instance.FPS,
             cpuUsage: PerformanceMonitor.Instance.CPUUsage,
             gpuUsage: PerformanceMonitor.Instance.GPUUsage,
@@ -78,10 +78,8 @@ public class UserEventLogger : MonoBehaviour
             ram: $"{SystemInfo.systemMemorySize} MB",
             os: SystemInfo.operatingSystem,
             vr_headset: XRGeneralSettings.Instance.Manager.activeLoader?.name ?? "None",
-            frustrationRate: 0,
-            helpAccessed: false,
-            rageQuits: 0,
-            replayRate: 0
+            frustrationRate: ActionFailureTracker.Instance.FailedAttempts,
+            helpAccessed: SettingsTracker.Instance.SettingsVisits > 0
         );
 
         // Validar los datos antes de agregarlos a la cola

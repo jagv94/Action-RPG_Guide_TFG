@@ -27,13 +27,11 @@ public class UserEventData
     [JsonProperty("vr_headset")] public string vr_headset; // Nombre del visor VR en uso.
     [JsonProperty("frustrationRate")] public int frustrationRate; // Veces que el usuario repite una acción sin éxito.
     [JsonProperty("helpAccessed")] public bool helpAccessed; // true si el usuario ha abierto la sección de ayuda/controles.
-    [JsonProperty("rageQuits")] public int rageQuits; // Número de veces que el usuario cierra la app tras un error o fallo.
-    [JsonProperty("replayRate")] public int replayRate; // Veces que un usuario repite la misma acción o prueba.
 
     public UserEventData(string userID, string sessionID, string eventType, string targetObject, float duration,
         float timeSinceLastEvent, float totalSessionTime, int missedClicks, float headMovement, string gazeTarget,
         int teleportUsage, float fps, float cpuUsage, float gpuUsage, float ramUsage, string cpu, string gpu, string ram,
-        string os, string vr_headset, int frustrationRate, bool helpAccessed, int rageQuits, int replayRate)
+        string os, string vr_headset, int frustrationRate, bool helpAccessed)
     {
         this.timestamp = DateTime.UtcNow.ToString("o");
         this.userID = userID;
@@ -58,7 +56,5 @@ public class UserEventData
         this.vr_headset = vr_headset;
         this.frustrationRate = frustrationRate;
         this.helpAccessed = helpAccessed;
-        this.rageQuits = rageQuits;
-        this.replayRate = replayRate;
     }
 }
