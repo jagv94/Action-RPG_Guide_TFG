@@ -26,7 +26,7 @@ public class UIInteractionLogger : MonoBehaviour
 
     void Update()
     {
-        if (DetectClick())
+        if (LoggerManager.Instance.Logger && DetectClick())
         {
             DetectClickType();
         }
@@ -43,6 +43,11 @@ public class UIInteractionLogger : MonoBehaviour
 
     private void DetectClickType()
     {
+        if (!LoggerManager.Instance.Logger)
+        {
+            return;
+        }
+
         PointerEventData pointerData = new PointerEventData(EventSystem.current)
         {
             position = Mouse.current?.position.ReadValue() ?? Vector2.zero

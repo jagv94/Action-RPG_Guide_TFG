@@ -2,47 +2,35 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using UnityEditor;
+using UnityEngine.UI;
+using TMPro;
 
 public class VRMenuManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject mainMenu;
-
-    [SerializeField]
-    private GameObject settingsMenu;
-
-    [SerializeField]
-    private GameObject gameMenu;
-
-    [SerializeField]
-    private XRRayInteractor rayInteractor;
-
-    [SerializeField]
-    private XRInteractorLineVisual lineVisual;
+    [SerializeField] private XRRayInteractor rayInteractor;
+    [SerializeField] private XRInteractorLineVisual lineVisual;
+    [SerializeField] private SceneAsset gameScene;
+    [SerializeField] private Canvas bodySettingsMenu;
+    [SerializeField] private Slider playerHeight;
+    [SerializeField] private TextMeshProUGUI heightText;
 
     private void Start()
     {
-        ShowMainMenu();
         EnableLaserPointer(true);
     }
 
-    public void ShowMainMenu()
+    private void Update()
     {
-        mainMenu.SetActive(true);
-        settingsMenu.SetActive(false);
-        gameMenu.SetActive(false);
-    }
-
-    public void ShowSettingsMenu()
-    {
-        mainMenu.SetActive(false);
-        settingsMenu.SetActive(true);
-        gameMenu.SetActive(false);
+        if (bodySettingsMenu != null && bodySettingsMenu.isActiveAndEnabled)
+        {
+            heightText.text = playerHeight.value.ToString();
+        }
     }
 
     public void StartGame()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene(gameScene.name);
     }
 
     public void QuitGame()
@@ -52,7 +40,10 @@ public class VRMenuManager : MonoBehaviour
 
     private void EnableLaserPointer(bool enable)
     {
-        rayInteractor.enabled = enable;
-        lineVisual.enabled = enable;
+        if (rayInteractor != null && lineVisual != null)
+        {
+            rayInteractor.enabled = enable;
+            lineVisual.enabled = enable;
+        }
     }
 }

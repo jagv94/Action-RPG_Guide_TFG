@@ -20,6 +20,11 @@ public class SettingsTracker : MonoBehaviour
 
     public void RegisterSettingsVisit()
     {
+        if (!LoggerManager.Instance.Logger)
+        {
+            return;
+        }
+
         SettingsVisits++;
         UserEventLogger.Instance.LogEvent("settings_opened", "SettingsMenu", 0f);
     }

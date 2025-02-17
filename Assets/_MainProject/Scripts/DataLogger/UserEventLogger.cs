@@ -46,6 +46,11 @@ public class UserEventLogger : MonoBehaviour
     /// <param name="duration">Duración del evento (en caso de eventos prolongados).</param>
     public void LogEvent(string eventType, string targetObject, float duration = 0f)
     {
+        if (!LoggerManager.Instance.Logger)
+        {
+            return;
+        }
+
         if (string.IsNullOrWhiteSpace(eventType))
         {
             Debug.LogError("Evento inválido: eventType no puede estar vacío.");

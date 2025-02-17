@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class AppExitLogger : MonoBehaviour
@@ -30,6 +29,11 @@ public class AppExitLogger : MonoBehaviour
 
     void OnApplicationQuit()
     {
+        if (!LoggerManager.Instance.Logger)
+        {
+            return;
+        }
+
         UserEventLogger.Instance.LogEvent("app_exit", "application", 0f);
         RegisterNormalExit();
     }
@@ -44,12 +48,22 @@ public class AppExitLogger : MonoBehaviour
 
     private void RegisterNormalExit()
     {
+        if (!LoggerManager.Instance.Logger)
+        {
+            return;
+        }
+
         PlayerPrefs.SetInt(LastSessionFlag, 1); // 1 = sesión cerrada correctamente
         PlayerPrefs.Save();
     }
 
     private void CheckForAbruptExit()
     {
+        if (!LoggerManager.Instance.Logger)
+        {
+            return;
+        }
+
         if (PlayerPrefs.GetInt(LastSessionFlag, 1) == 0)
         {
             Debug.LogWarning("Se detectó un cierre abrupto en la última sesión.");

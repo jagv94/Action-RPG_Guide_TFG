@@ -20,6 +20,11 @@ public class TeleportTracker : MonoBehaviour
 
     public void RegisterTeleport()
     {
+        if (!LoggerManager.Instance.Logger)
+        {
+            return;
+        }
+
         TeleportCount++;
         UserEventLogger.Instance.LogEvent("teleport", "Player", 0f);
     }
