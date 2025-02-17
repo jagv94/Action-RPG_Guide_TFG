@@ -34,7 +34,7 @@ public class UserEventLogger : MonoBehaviour
     {
         sessionStartTime = Time.time;
         lastEventTime = sessionStartTime;
-        UserID = IDGenerator.Instance.UserID;
+        UserID = IDGenerator.GenerateUserID();
         SessionID = Guid.NewGuid().ToString();
     }
 

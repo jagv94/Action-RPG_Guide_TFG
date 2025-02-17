@@ -1,32 +1,9 @@
 using System;
 using UnityEngine;
 
-public class IDGenerator : MonoBehaviour
+public static class IDGenerator
 {
-    private static IDGenerator instance;
-    public static IDGenerator Instance => instance;
-
-    public string UserID { get; private set; }
-
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private void Start()
-    {
-        UserID = GenerateUserID();
-    }
-
-    private string GenerateUserID()
+    public static string GenerateUserID()
     {
         string hashBase = SystemInfo.deviceModel + SystemInfo.processorType + SystemInfo.graphicsDeviceName + SystemInfo.systemMemorySize;
         int hashCode = hashBase.GetHashCode(); // Hash único basado en el hardware
