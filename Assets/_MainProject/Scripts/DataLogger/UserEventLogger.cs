@@ -32,6 +32,11 @@ public class UserEventLogger : MonoBehaviour
 
     void Start()
     {
+        if (!LoggerManager.Instance.Logger)
+        {
+            return;
+        }
+
         sessionStartTime = Time.time;
         lastEventTime = sessionStartTime;
         UserID = IDGenerator.GenerateUserID();

@@ -8,6 +8,7 @@ public class LoggerManager : MonoBehaviour
     private const string LoggerPref = "LoggerIsActive";
 
     [SerializeField] private Button loggerButton;
+    [SerializeField] private Button loggerButton2;
 
     void Awake()
     {
@@ -29,9 +30,42 @@ public class LoggerManager : MonoBehaviour
         Logger = false;
     }
 
+    private void Start()
+    {
+        if (loggerButton != null && loggerButton2 != null)
+        {
+            ColorBlock buttonColors = loggerButton.colors;
+
+            if (!Logger)
+            {
+                buttonColors.normalColor = new Color(191, 0, 0);
+                buttonColors.selectedColor = new Color(191, 0, 0);
+                buttonColors.highlightedColor = new Color(155, 0, 0);
+                buttonColors.pressedColor = new Color(246, 61, 72);
+                loggerButton.colors = buttonColors;
+                loggerButton2.colors = buttonColors;
+
+                //PlayerPrefs.SetInt(LoggerPref, 1); // 1 = Activo.
+                //PlayerPrefs.Save();
+            }
+            else
+            {
+                buttonColors.normalColor = new Color(0, 191, 0);
+                buttonColors.selectedColor = new Color(0, 191, 0);
+                buttonColors.highlightedColor = new Color(0, 155, 0);
+                buttonColors.pressedColor = new Color(61, 246, 72);
+                loggerButton.colors = buttonColors;
+                loggerButton2.colors = buttonColors;
+
+                //PlayerPrefs.SetInt(LoggerPref, 0); // 0 = Inactivo.
+                //PlayerPrefs.Save();
+            }
+        }
+    }
+
     public void ToggleLog()
     {
-        if (loggerButton != null)
+        if (loggerButton != null && loggerButton2 != null)
         {
             ColorBlock buttonColors = loggerButton.colors;
 
@@ -43,6 +77,7 @@ public class LoggerManager : MonoBehaviour
                 buttonColors.highlightedColor = new Color(0, 155, 0);
                 buttonColors.pressedColor = new Color(61, 246, 72);
                 loggerButton.colors = buttonColors;
+                loggerButton2.colors = buttonColors;
 
                 //PlayerPrefs.SetInt(LoggerPref, 1); // 1 = Activo.
                 //PlayerPrefs.Save();
@@ -55,6 +90,7 @@ public class LoggerManager : MonoBehaviour
                 buttonColors.highlightedColor = new Color(155, 0, 0);
                 buttonColors.pressedColor = new Color(246, 61, 72);
                 loggerButton.colors = buttonColors;
+                loggerButton2.colors = buttonColors;
 
                 //PlayerPrefs.SetInt(LoggerPref, 0); // 0 = Inactivo.
                 //PlayerPrefs.Save();

@@ -22,6 +22,11 @@ public class AppExitLogger : MonoBehaviour
 
     void Start()
     {
+        if (!LoggerManager.Instance.Logger)
+        {
+            return;
+        }
+
         CheckForAbruptExit();
         PlayerPrefs.SetInt(LastSessionFlag, 0); // 0 = sesión en curso, aún no cerrada
         PlayerPrefs.Save();
@@ -48,22 +53,12 @@ public class AppExitLogger : MonoBehaviour
 
     private void RegisterNormalExit()
     {
-        if (!LoggerManager.Instance.Logger)
-        {
-            return;
-        }
-
         PlayerPrefs.SetInt(LastSessionFlag, 1); // 1 = sesión cerrada correctamente
         PlayerPrefs.Save();
     }
 
     private void CheckForAbruptExit()
     {
-        if (!LoggerManager.Instance.Logger)
-        {
-            return;
-        }
-
         if (PlayerPrefs.GetInt(LastSessionFlag, 1) == 0)
         {
             Debug.LogWarning("Se detectó un cierre abrupto en la última sesión.");
