@@ -12,7 +12,6 @@ public class UserEventData
     [JsonProperty("duration")] public float duration; // Duración del evento.
     [JsonProperty("timeSinceLastEvent")] public float timeSinceLastEvent; // Intervalo de tiempo desde el evento prévio.
     [JsonProperty("totalSessionTime")] public float totalSessionTime; // Tiempo total desde que se empezó una sesión hasta que se capturó el evento.
-    [JsonProperty("missedClicks")] public int missedClicks; // Veces que el usuario hace clic en una zona sin botones.
     [JsonProperty("headMovement")] public float headMovement; // Movimiento de cabeza en VR en grados por segundo.
     [JsonProperty("gazeTarget")] public string gazeTarget; // Objeto o interfaz donde el usuario fija la mirada en VR.
     [JsonProperty("teleportUsage")] public int teleportUsage; // Número de veces que el usuario usa teletransporte en VR.
@@ -29,7 +28,7 @@ public class UserEventData
     [JsonProperty("helpAccessed")] public bool helpAccessed; // true si el usuario ha abierto la sección de ayuda/controles.
 
     public UserEventData(string userID, string sessionID, string eventType, string targetObject, float duration,
-        float timeSinceLastEvent, float totalSessionTime, int missedClicks, float headMovement, string gazeTarget,
+        float timeSinceLastEvent, float totalSessionTime, float headMovement, string gazeTarget,
         int teleportUsage, float fps, float cpuUsage, float gpuUsage, float ramUsage, string cpu, string gpu, string ram,
         string os, string vr_headset, int frustrationRate, bool helpAccessed)
     {
@@ -41,7 +40,6 @@ public class UserEventData
         this.duration = duration;
         this.timeSinceLastEvent = timeSinceLastEvent;
         this.totalSessionTime = totalSessionTime;
-        this.missedClicks = missedClicks;
         this.headMovement = headMovement;
         this.gazeTarget = gazeTarget;
         this.teleportUsage = teleportUsage;

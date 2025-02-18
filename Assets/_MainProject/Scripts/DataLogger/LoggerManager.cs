@@ -22,10 +22,10 @@ public class LoggerManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //if (PlayerPrefs.GetInt(LoggerPref, 1) == 0) // Si no existe se pone a 1 por defecto (1 = Activo).
-        //{
-        //    Logger = false;
-        //}
+        if (PlayerPrefs.GetInt(LoggerPref, 1) == 0) // Si no existe se pone a 1 por defecto (1 = Activo).
+        {
+            Logger = false;
+        }
 
         Logger = false;
     }
@@ -44,9 +44,6 @@ public class LoggerManager : MonoBehaviour
                 buttonColors.pressedColor = new Color(246, 61, 72);
                 loggerButton.colors = buttonColors;
                 loggerButton2.colors = buttonColors;
-
-                //PlayerPrefs.SetInt(LoggerPref, 1); // 1 = Activo.
-                //PlayerPrefs.Save();
             }
             else
             {
@@ -56,9 +53,6 @@ public class LoggerManager : MonoBehaviour
                 buttonColors.pressedColor = new Color(61, 246, 72);
                 loggerButton.colors = buttonColors;
                 loggerButton2.colors = buttonColors;
-
-                //PlayerPrefs.SetInt(LoggerPref, 0); // 0 = Inactivo.
-                //PlayerPrefs.Save();
             }
         }
     }
@@ -79,8 +73,8 @@ public class LoggerManager : MonoBehaviour
                 loggerButton.colors = buttonColors;
                 loggerButton2.colors = buttonColors;
 
-                //PlayerPrefs.SetInt(LoggerPref, 1); // 1 = Activo.
-                //PlayerPrefs.Save();
+                PlayerPrefs.SetInt(LoggerPref, 1); // 1 = Activo.
+                PlayerPrefs.Save();
             }
             else
             {
@@ -92,8 +86,8 @@ public class LoggerManager : MonoBehaviour
                 loggerButton.colors = buttonColors;
                 loggerButton2.colors = buttonColors;
 
-                //PlayerPrefs.SetInt(LoggerPref, 0); // 0 = Inactivo.
-                //PlayerPrefs.Save();
+                PlayerPrefs.SetInt(LoggerPref, 0); // 0 = Inactivo.
+                PlayerPrefs.Save();
             }
         }
     }
