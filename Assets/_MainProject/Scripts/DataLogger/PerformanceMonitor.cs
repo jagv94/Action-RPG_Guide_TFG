@@ -48,6 +48,11 @@ public class PerformanceMonitor : MonoBehaviour
 
     private void UpdatePerformanceMetrics()
     {
+        if (!LoggerManager.Instance.Logger)
+        {
+            return;
+        }
+
         FPS = 1.0f / Time.unscaledDeltaTime;
         CPUUsage = CalculateCPUUsage();
         GPUUsage = EstimateGPUUsage();

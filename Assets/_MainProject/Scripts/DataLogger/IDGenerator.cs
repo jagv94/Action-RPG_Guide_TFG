@@ -1,36 +1,21 @@
 using System;
 using UnityEngine;
 
-public class IDGenerator : MonoBehaviour
+public static class IDGenerator
 {
-    private static IDGenerator instance;
-    public static IDGenerator Instance => instance;
-
-    public string UserID { get; private set; }
-
-    void Awake()
+    public static string GenerateUserID()
     {
-        if (instance == null)
+        if (PlayerPrefs.GetString("UID", "null") == "null")
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            string hashBase = SystemInfo.deviceModel + SystemInfo.processorType + SystemInfo.graphicsDeviceName + SystemInfo.systemMemorySize;
+            int hashCode = hashBase.GetHashCode(); // Hash único basado en el hardware
+            string timestamp = DateTime.UtcNow.ToString("yyyyMMddHHmmss");
+            return $"id-{hashCode:X8}-{timestamp}"; // Formato similar a IPv6
         }
+
         else
         {
-            Destroy(gameObject);
+            return PlayerPrefs.GetString("UID", "null");
         }
-    }
-
-    private void Start()
-    {
-        UserID = GenerateUserID();
-    }
-
-    private string GenerateUserID()
-    {
-        string hashBase = SystemInfo.deviceModel + SystemInfo.processorType + SystemInfo.graphicsDeviceName + SystemInfo.systemMemorySize;
-        int hashCode = hashBase.GetHashCode(); // Hash único basado en el hardware
-        string timestamp = DateTime.UtcNow.ToString("yyyyMMddHHmmss");
-        return $"id-{hashCode:X8}-{timestamp}"; // Formato similar a IPv6
     }
 }

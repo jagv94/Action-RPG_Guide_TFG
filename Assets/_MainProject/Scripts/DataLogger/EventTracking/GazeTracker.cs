@@ -31,6 +31,11 @@ public class GazeTracker : MonoBehaviour
 
     private void TrackGaze()
     {
+        if (!LoggerManager.Instance.Logger)
+        {
+            return;
+        }
+
         RaycastHit hit;
         if (Physics.Raycast(vrCamera.position, vrCamera.forward, out hit))
         {

@@ -20,6 +20,11 @@ public class ActionFailureTracker : MonoBehaviour
 
     public void RegisterFailedAction(string targetObject)
     {
+        if (!LoggerManager.Instance.Logger)
+        {
+            return;
+        }
+
         FailedAttempts++;
         UserEventLogger.Instance.LogEvent("failed_action", targetObject, 0f);
     }

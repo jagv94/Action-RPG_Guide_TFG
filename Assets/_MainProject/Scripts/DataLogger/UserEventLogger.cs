@@ -23,6 +23,9 @@ public class UserEventLogger : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            UserID = IDGenerator.GenerateUserID();
+            SessionID = Guid.NewGuid().ToString();
         }
         else
         {
@@ -32,10 +35,13 @@ public class UserEventLogger : MonoBehaviour
 
     void Start()
     {
+        if (!LoggerManager.Instance.Logger)
+        {
+            return;
+        }
+
         sessionStartTime = Time.time;
         lastEventTime = sessionStartTime;
-        UserID = IDGenerator.Instance.UserID;
-        SessionID = Guid.NewGuid().ToString();
     }
 
     /// <summary>
@@ -46,6 +52,11 @@ public class UserEventLogger : MonoBehaviour
     /// <param name="duration">Duración del evento (en caso de eventos prolongados).</param>
     public void LogEvent(string eventType, string targetObject, float duration = 0f)
     {
+        if (!LoggerManager.Instance.Logger)
+        {
+            return;
+        }
+
         if (string.IsNullOrWhiteSpace(eventType))
         {
             Debug.LogError("Evento inválido: eventType no puede estar vacío.");
@@ -65,22 +76,25 @@ public class UserEventLogger : MonoBehaviour
             duration: duration,
             timeSinceLastEvent: timeSinceLastEvent,
             totalSessionTime: totalSessionTime,
-            missedClicks: 0, // Podría actualizarse con lógica adicional
-            headMovement: PerformanceMonitor.Instance.HeadMovement,
+            headMovement: PerformanceMonitor.Instance != null ? PerformanceMonitor.Instance.HeadMovement : 0f,
             gazeTarget: string.IsNullOrEmpty(targetObject) ? "AirClick" : targetObject,
-            teleportUsage: TeleportTracker.Instance.TeleportCount, // Debe ser actualizado en otro módulo
-            fps: PerformanceMonitor.Instance.FPS,
-            cpuUsage: PerformanceMonitor.Instance.CPUUsage,
-            gpuUsage: PerformanceMonitor.Instance.GPUUsage,
-            ramUsage: PerformanceMonitor.Instance.RAMUsage,
+            teleportUsage: TeleportTracker.Instance != null ? TeleportTracker.Instance.TeleportCount : 0,
+            fps: PerformanceMonitor.Instance != null ? PerformanceMonitor.Instance.FPS : 0,
+            cpuUsage: PerformanceMonitor.Instance != null ? PerformanceMonitor.Instance.CPUUsage : 0f,
+            gpuUsage: PerformanceMonitor.Instance != null ? PerformanceMonitor.Instance.GPUUsage : 0f,
+            ramUsage: PerformanceMonitor.Instance != null ? PerformanceMonitor.Instance.RAMUsage : 0f,
             cpu: SystemInfo.processorType,
             gpu: SystemInfo.graphicsDeviceName,
             ram: $"{SystemInfo.systemMemorySize} MB",
             os: SystemInfo.operatingSystem,
-            vr_headset: XRGeneralSettings.Instance.Manager.activeLoader?.name ?? "None",
-            frustrationRate: ActionFailureTracker.Instance.FailedAttempts,
-            helpAccessed: SettingsTracker.Instance.SettingsVisits > 0
+            vr_headset: XRGeneralSettings.Instance != null &&
+                XRGeneralSettings.Instance.Manager != null && 
+                XRGeneralSettings.Instance.Manager.activeLoader != null ?
+                XRGeneralSettings.Instance.Manager.activeLoader.name : "None",
+            frustrationRate: ActionFailureTracker.Instance != null ? ActionFailureTracker.Instance.FailedAttempts : 0,
+            helpAccessed: SettingsTracker.Instance != null && SettingsTracker.Instance.SettingsVisits > 0
         );
+
 
         // Validar los datos antes de agregarlos a la cola
         if (!ValidateEventData(data))
