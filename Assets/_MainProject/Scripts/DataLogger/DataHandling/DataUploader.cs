@@ -12,7 +12,7 @@ public class DataUploader : MonoBehaviour
 
     private IFirebaseService firebaseService;
     private float uploadInterval = 10f;
-    private int batchSizeThreshold = 20;
+    private int batchSizeThreshold = 0; //Por defecto a 20
     private bool isUploading = false;
 
     void Awake()
@@ -48,7 +48,7 @@ public class DataUploader : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(uploadInterval);
-            if (UserEventLogger.Instance.GetAndClearEventQueue().Count >= batchSizeThreshold)
+            if (UserEventLogger.Instance.GetEventQueue().Count >= batchSizeThreshold)
             {
                 UploadData();
             }

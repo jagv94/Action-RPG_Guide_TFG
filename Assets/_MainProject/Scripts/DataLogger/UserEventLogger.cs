@@ -106,6 +106,16 @@ public class UserEventLogger : MonoBehaviour
         eventQueue.Enqueue(data);
     }
 
+    public List<UserEventData> GetEventQueue()
+    {
+        List<UserEventData> batch = new List<UserEventData>();
+        foreach (UserEventData data in eventQueue)
+        {
+            batch.Add(data);
+        }
+        return batch;
+    }
+
     /// <summary>
     /// Retorna los eventos registrados y vacía la lista.
     /// </summary>
