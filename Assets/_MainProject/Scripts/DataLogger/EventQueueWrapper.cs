@@ -8,3 +8,10 @@ public class EventQueueWrapper
     [JsonProperty("events")]
     public List<UserEventData> events;
 }
+
+[Serializable]
+public class BasicEventQueueWrapper
+{
+    [JsonProperty("events")]
+    public List<UserEventBasicData> events;
+}

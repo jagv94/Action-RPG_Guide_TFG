@@ -1395,7 +1395,7 @@ GameObject:
   - component: {fileID: 45081766}
   - component: {fileID: 45081765}
   m_Layer: 5
-  m_Name: Graphics Button
+  m_Name: Settings Graphics Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1637,6 +1637,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 45081768}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4822,7 +4834,7 @@ GameObject:
   - component: {fileID: 139217659}
   - component: {fileID: 139217658}
   m_Layer: 5
-  m_Name: Exit Button
+  m_Name: Submenu Exit Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4973,6 +4985,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 139217661}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &139217662
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5071,11 +5095,10 @@ GameObject:
   - component: {fileID: 148479967}
   - component: {fileID: 148479966}
   - component: {fileID: 148479965}
-  - component: {fileID: 148479964}
-  - component: {fileID: 148479963}
   - component: {fileID: 148479962}
   - component: {fileID: 148479961}
   - component: {fileID: 148479960}
+  - component: {fileID: 148479964}
   - component: {fileID: 148479959}
   - component: {fileID: 148479970}
   m_Layer: 0
@@ -5097,30 +5120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b5b629a1be0b2459dc9e0c191c3210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftSelectAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Left Select
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 6e038370-08b3-43b5-9c5d-c1608c699218
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  rightSelectAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Right Select
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: d32b322d-b1c3-4324-9874-dcd4180c8ba7
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  leftSelectAction: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  rightSelectAction: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  leftSelectActionUI: {fileID: -6395602842196007441, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  rightSelectActionUI: {fileID: 3279264004350380116, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!114 &148479960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5155,18 +5158,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3ae40f3d26a6b943a52ad9dee06c41c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &148479963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 148479958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccfe95247414b024ca26fe50072f4d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &148479964
@@ -7829,7 +7820,7 @@ GameObject:
   - component: {fileID: 271924968}
   - component: {fileID: 271924967}
   m_Layer: 5
-  m_Name: Setting Button
+  m_Name: Submenu Setting Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7992,13 +7983,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 148479963}
-        m_TargetAssemblyTypeName: SettingsTracker, Assembly-CSharp
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
         m_MethodName: RegisterSettingsVisit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 271924970}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -9117,7 +9120,7 @@ GameObject:
   - component: {fileID: 302467645}
   - component: {fileID: 302467644}
   m_Layer: 5
-  m_Name: Play Button
+  m_Name: Submenu Play Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9280,6 +9283,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 302467647}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &302467648
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9424,7 +9439,7 @@ GameObject:
   - component: {fileID: 303977460}
   - component: {fileID: 303977459}
   m_Layer: 5
-  m_Name: Audio Button
+  m_Name: Settings Audio Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9666,6 +9681,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 303977462}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -11125,6 +11152,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 334541322}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &334541323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11481,6 +11520,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 335993925}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -14917,6 +14968,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 454439884}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -21075,6 +21138,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 719019187}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!222 &719019188
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24563,7 +24638,7 @@ GameObject:
   - component: {fileID: 828716554}
   - component: {fileID: 828716553}
   m_Layer: 5
-  m_Name: Back Button
+  m_Name: Settings Back Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24817,6 +24892,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 828716556}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -26876,7 +26963,7 @@ GameObject:
   - component: {fileID: 888597288}
   - component: {fileID: 888597287}
   m_Layer: 5
-  m_Name: Credits Button
+  m_Name: Submenu Credits Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27014,7 +27101,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1585930634}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 888597290}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &888597291
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28145,6 +28244,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 918792516}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 148479970}
         m_TargetAssemblyTypeName: LoggerManager, Assembly-CSharp
         m_MethodName: ToggleLog
@@ -32154,7 +32265,7 @@ GameObject:
   - component: {fileID: 1071643974}
   - component: {fileID: 1071643973}
   m_Layer: 5
-  m_Name: Logger Button
+  m_Name: Submenu Logger Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32293,6 +32404,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1071643976}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 148479970}
         m_TargetAssemblyTypeName: LoggerManager, Assembly-CSharp
         m_MethodName: ToggleLog
@@ -38221,7 +38344,7 @@ GameObject:
   - component: {fileID: 1373237773}
   - component: {fileID: 1373237772}
   m_Layer: 5
-  m_Name: Optimization Button
+  m_Name: Settings Optimization Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38463,6 +38586,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1373237775}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -45029,7 +45164,7 @@ GameObject:
   - component: {fileID: 1647873866}
   - component: {fileID: 1647873865}
   m_Layer: 5
-  m_Name: Controls Button
+  m_Name: Settings Controls Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45271,6 +45406,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1647873868}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -50806,6 +50953,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1824861122}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1824861123
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -54204,6 +54363,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1991878805}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1991878806
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -56096,7 +56267,7 @@ GameObject:
   - component: {fileID: 2062288296}
   - component: {fileID: 2062288295}
   m_Layer: 5
-  m_Name: Locomotion Button
+  m_Name: Settings Locomotion Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56338,6 +56509,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2062288298}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -58938,13 +59121,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 148479963}
-        m_TargetAssemblyTypeName: SettingsTracker, Assembly-CSharp
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
         m_MethodName: RegisterSettingsVisit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 64996556118732210}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -59231,7 +59426,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3571490507170010738}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 830497496315912313}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &890345282135934229
 RectTransform:
   m_ObjectHideFlags: 0
@@ -61390,6 +61597,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 4157372518764515272}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1203249085}
         m_TargetAssemblyTypeName: VRMenuManager, Assembly-CSharp
         m_MethodName: QuitGame
@@ -65148,6 +65367,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 148479959}
+        m_TargetAssemblyTypeName: UIInteractionLogger, Assembly-CSharp
+        m_MethodName: ButtonPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 5942728608470164069}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &5950363945435794765
 RectTransform:
   m_ObjectHideFlags: 0
@@ -65182,7 +65413,7 @@ GameObject:
   - component: {fileID: 8967618003149740737}
   - component: {fileID: 3733686823624014424}
   m_Layer: 5
-  m_Name: Setting Button
+  m_Name: Settings Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
