@@ -42,6 +42,7 @@ public class FirebaseDataHandler : MonoBehaviour, IFirebaseService
 
     private IEnumerator PostDataCoroutine(string path, string jsonData, Action<bool> callback)
     {
+        yield return new WaitForSecondsRealtime(1);
         string url = databaseUrl + path;
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
 

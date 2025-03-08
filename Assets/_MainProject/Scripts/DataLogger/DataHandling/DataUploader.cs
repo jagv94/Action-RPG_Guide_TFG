@@ -12,7 +12,7 @@ public class DataUploader : MonoBehaviour
 
     private IFirebaseService firebaseService;
     private float uploadInterval = 10f;
-    private int batchSizeThreshold = 20;
+    private int batchSizeThreshold = 0; //Por defecto a 20
     private bool isUploading = false;
 
     void Awake()
@@ -32,6 +32,10 @@ public class DataUploader : MonoBehaviour
     {
         firebaseService = FirebaseDataHandler.Instance;
 
+        //Evento que marca cuando se empieza una sesión.
+        UserEventLogger.Instance.LogBasicEvent("init_event", "Session Started");
+        UploadBasicData();
+
         // Cargar eventos almacenados y enviarlos
         List<UserEventData> storedEvents = DataStorageManager.Instance.LoadEvents();
         if (storedEvents.Count > 0)
@@ -48,11 +52,46 @@ public class DataUploader : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(uploadInterval);
-            if (UserEventLogger.Instance.GetAndClearEventQueue().Count >= batchSizeThreshold)
+            if (UserEventLogger.Instance.GetEventQueue().Count >= batchSizeThreshold)
             {
                 UploadData();
             }
         }
+    }
+
+    private async void UploadBasicData()
+    {
+        if (isUploading) return;
+
+        isUploading = true;
+
+        // Obtener eventos en memoria y eventos locales
+        List<UserEventBasicData> basicData = new List<UserEventBasicData> { UserEventLogger.Instance.GetBasicEvent() };
+        basicData.AddRange(DataStorageManager.Instance.LoadBasicEvents());
+
+        if (basicData.Count == 0)
+        {
+            isUploading = false;
+            return;
+        }
+
+        string jsonData = JsonConvert.SerializeObject(new BasicEventQueueWrapper { events = basicData });
+        string timestamp = DateTime.UtcNow.ToString("yyyyMMddTHHmmssfffZ");
+        string path = $"userEvents/{UserEventLogger.Instance.UserID}/{UserEventLogger.Instance.SessionID}/{timestamp}.json";
+
+        bool success = await TrySendDataAsync(path, jsonData);
+
+        if (!success)
+        {
+            Debug.LogError("No se pudo enviar a Firebase.");
+        }
+        else
+        {
+            Debug.Log("Eventos enviados con éxito.");
+            DataStorageManager.Instance.ClearLocalStorage(); // Borra eventos locales tras el envío
+        }
+
+        isUploading = false;
     }
 
     private async void UploadData()
