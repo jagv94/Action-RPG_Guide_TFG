@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 86
+  controlID: 107
   draggingID: 0
 --- !u!114 &3
 MonoBehaviour:
@@ -326,7 +326,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/_MainProject/UI
+    - Assets/_MainProject/Scripts/Settings
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -336,16 +336,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/_MainProject/UI
+  - Assets/_MainProject/Scripts/Settings
   m_LastFoldersGridSize: -1
   m_LastProjectPath: E:\_Trabajo\Unity projects\Action-RPG_Guide_TFG
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 7.5999756}
-    m_SelectedIDs: 56bf0000
-    m_LastClickedID: 48982
-    m_ExpandedIDs: 0000000098bb00009abb00009cbb00009ebb0000a0bb0000a2bb000000ca9a3b
+    m_SelectedIDs: 1cbc0000
+    m_LastClickedID: 48156
+    m_ExpandedIDs: 00000000a4bb0000a6bb0000a8bb0000aabb0000acbb0000aebb000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -374,7 +374,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000098bb00009abb00009cbb00009ebb0000a0bb0000a2bb0000
+    m_ExpandedIDs: 00000000a4bb0000a6bb0000a8bb0000aabb0000acbb0000aebb0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300000000000058ce0000aad0000024b60000ac1a020094b70000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -475,7 +475,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 444.00006
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
@@ -520,9 +520,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: e4d0feff86defeff1442ffff3042ffff6a43ffff6c43ffff7c43ffff8043ffffa643ffffb043ffffb643ffffc043ffffda43ffffe843fffffc43ffff0e44ffff3644ffff7a44ffff6245ffff8645fffff045ffff725cffff5a73ffffa482ffffc482ffff1afbffff5ca600006ea80000deab0000a2b2000084b60000241902007a190200341b0200cc1c0200d0220200622302008025020060280200
+      m_SelectedIDs: 50a40000
+      m_LastClickedID: 42064
+      m_ExpandedIDs: 1afbffff50a40000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1042,9 +1042,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -0.13342607, y: 1.6512977, z: 0.91415983}
+    m_Target: {x: -0.12192667, y: 1.5724039, z: 0.89597124}
     speed: 2
-    m_Value: {x: -0.13342607, y: 1.6512977, z: 0.91415983}
+    m_Value: {x: -0.12192667, y: 1.5724039, z: 0.89597124}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1082,7 +1082,7 @@ MonoBehaviour:
       m_Fade:
         m_Target: 0
         speed: 2
-        m_Value: 1
+        m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
@@ -1092,11 +1092,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.09594438, y: -0.10283711, z: 0.0099669, w: -0.9900229}
     speed: 2
-    m_Value: {x: -0.095931135, y: -0.10402382, z: 0.010081905, w: -0.9898862}
+    m_Value: {x: -0.09594316, y: -0.1028358, z: 0.009966772, w: -0.99001026}
   m_Size:
-    m_Target: 0.874356
+    m_Target: 0.2769433
     speed: 2
-    m_Value: 0.874356
+    m_Value: 0.2769433
   m_Ortho:
     m_Target: 0
     speed: 2
