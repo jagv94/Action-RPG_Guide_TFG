@@ -13,7 +13,8 @@ public class VRMenuManager : MonoBehaviour
 
     private void Update()
     {
-        if (bodySettingsMenu != null && bodySettingsMenu.isActiveAndEnabled)
+        if (bodySettingsMenu != null && bodySettingsMenu.isActiveAndEnabled &&
+            playerHeight  != null && heightText != null)
         {
             heightText.text = playerHeight.value.ToString();
         }
