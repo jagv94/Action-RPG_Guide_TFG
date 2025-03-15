@@ -139,12 +139,12 @@ TextureImporter:
       name: delete_0
       rect:
         serializedVersion: 2
-        x: 53
+        x: 31
         y: 31
-        width: 150
+        width: 194
         height: 194
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

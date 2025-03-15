@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 97cc03b4c56a6434db842170cada7139
+guid: 741f31e0ff9fe804c8c3984ac23c532b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,23 +136,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: domino-mask_0
+      name: check-white_0
       rect:
         serializedVersion: 2
-        x: 31
-        y: 31
-        width: 194
-        height: 194
+        x: 37
+        y: 37
+        width: 187
+        height: 187
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee185f2a4efbf154fb647b94a8bec1c6
-      internalID: -1843265925
+      spriteID: 8dff4125c04e7d74fa89ff95614d15d1
+      internalID: 1666905561
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 08fbdfa4efbfefe4ea123d00003c727c
+    spriteID: 23180b4cf6aee5d42bc176930427972b
     internalID: 0
     vertices: []
     indices: 
@@ -171,7 +171,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      domino-mask_0: -1843265925
+      check-white_0: 1666905561
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
