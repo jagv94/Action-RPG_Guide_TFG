@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
-using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 

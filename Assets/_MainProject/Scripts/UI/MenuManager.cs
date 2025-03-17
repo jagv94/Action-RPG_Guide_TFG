@@ -7,7 +7,7 @@ using TMPro;
 public class VRMenuManager : MonoBehaviour
 {
     [SerializeField] private SceneAsset gameScene;
-    [SerializeField] private SceneAsset MainMenuScene;
+    [SerializeField] private SceneAsset mainMenuScene;
     [SerializeField] private Canvas bodySettingsMenu;
     [SerializeField] private Slider playerHeight;
     [SerializeField] private TextMeshProUGUI heightText;
@@ -24,11 +24,6 @@ public class VRMenuManager : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(gameScene.name);
-    }
-
-    public void MainMenu()
-    {
-        SceneManager.LoadScene(MainMenuScene.name);
     }
 
     public void QuitGame()
