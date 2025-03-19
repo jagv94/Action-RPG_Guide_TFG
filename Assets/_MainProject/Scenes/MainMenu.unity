@@ -30931,6 +30931,8 @@ MonoBehaviour:
   followSpeed: 5
   rotationSpeed: 5
   offset: {x: 0, y: -0.25, z: 1}
+  distanceThreshold: 0.5
+  angleThreshold: 2
 --- !u!114 &4470534567860588275
 MonoBehaviour:
   m_ObjectHideFlags: 0

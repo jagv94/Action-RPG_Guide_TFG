@@ -35788,6 +35788,8 @@ MonoBehaviour:
   followSpeed: 5
   rotationSpeed: 5
   offset: {x: 0, y: -0.16, z: 1}
+  distanceThreshold: 0.5
+  angleThreshold: 2
 --- !u!1 &4799127097001144857
 GameObject:
   m_ObjectHideFlags: 0
