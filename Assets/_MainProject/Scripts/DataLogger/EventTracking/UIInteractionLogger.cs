@@ -1,15 +1,17 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
-using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class UIInteractionLogger : MonoBehaviour
 {
     public static UIInteractionLogger Instance;
 
-    [Header("Input Actions (Usando los controles preconfigurados)")]
-    public InputActionProperty leftSelectAction;
-    public InputActionProperty rightSelectAction;
+    public InputActionReference leftSelectAction;
+    public InputActionReference rightSelectAction;
+    public InputActionReference leftSelectActionUI;
+    public InputActionReference rightSelectActionUI;
+
+    public int SettingsVisits { get; private set; } = 0;
 
     void Awake()
     {
@@ -34,11 +36,10 @@ public class UIInteractionLogger : MonoBehaviour
 
     private bool DetectClick()
     {
-        bool leftPressed = leftSelectAction.action.WasPressedThisFrame();
-        bool rightPressed = rightSelectAction.action.WasPressedThisFrame();
-        bool mousePressed = Mouse.current?.leftButton.wasPressedThisFrame ?? false;
+        bool leftPressed = leftSelectAction.action.WasPressedThisFrame() || leftSelectActionUI.action.WasPressedThisFrame();
+        bool rightPressed = rightSelectAction.action.WasPressedThisFrame() || rightSelectActionUI.action.WasPressedThisFrame();
 
-        return leftPressed || rightPressed || mousePressed;
+        return leftPressed || rightPressed;
     }
 
     private void DetectClickType()
@@ -48,29 +49,26 @@ public class UIInteractionLogger : MonoBehaviour
             return;
         }
 
-        PointerEventData pointerData = new PointerEventData(EventSystem.current)
-        {
-            position = Mouse.current?.position.ReadValue() ?? Vector2.zero
-        };
+        UserEventLogger.Instance.LogEvent("click_air_or_ui", "Click on air or UI");
+    }
 
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerData, results);
+    public void RegisterSettingsVisit()
+    {
+        if (!LoggerManager.Instance.Logger)
+        {
+            return;
+        }
 
-        if (results.Count > 0)
+        SettingsVisits++;
+    }
+
+    public void ButtonPressed(Button clickedObject)
+    {
+        if (!LoggerManager.Instance.Logger && clickedObject != null)
         {
-            GameObject clickedObject = results[0].gameObject;
-            if (clickedObject.GetComponent<UnityEngine.UI.Button>())
-            {
-                UserEventLogger.Instance.LogEvent("click_button", clickedObject.name);
-            }
-            else
-            {
-                UserEventLogger.Instance.LogEvent("click_ui", clickedObject.name);
-            }
+            return;
         }
-        else
-        {
-            UserEventLogger.Instance.LogEvent("click_air", "None");
-        }
+
+        UserEventLogger.Instance.LogEvent("click_button", clickedObject.name);
     }
 }

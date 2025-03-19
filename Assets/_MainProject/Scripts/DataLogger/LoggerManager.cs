@@ -26,8 +26,6 @@ public class LoggerManager : MonoBehaviour
         {
             Logger = false;
         }
-
-        Logger = false;
     }
 
     private void Start()

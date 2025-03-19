@@ -47,6 +47,27 @@ public class DataStorageManager : MonoBehaviour
     /// <summary>
     /// Carga eventos almacenados localmente.
     /// </summary>
+    public List<UserEventBasicData> LoadBasicEvents()
+    {
+        try
+        {
+            if (!File.Exists(localDataPath)) return new List<UserEventBasicData>();
+
+            string jsonData = File.ReadAllText(localDataPath);
+            var eventWrapper = JsonConvert.DeserializeObject<BasicEventQueueWrapper>(jsonData);
+            Debug.Log("Eventos cargados desde almacenamiento local.");
+            return eventWrapper?.events ?? new List<UserEventBasicData>();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error al cargar eventos locales: " + e.Message);
+            return new List<UserEventBasicData>();
+        }
+    }
+
+    /// <summary>
+    /// Carga eventos almacenados localmente.
+    /// </summary>
     public List<UserEventData> LoadEvents()
     {
         try

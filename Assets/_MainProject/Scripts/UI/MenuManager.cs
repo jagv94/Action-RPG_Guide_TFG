@@ -7,13 +7,15 @@ using TMPro;
 public class VRMenuManager : MonoBehaviour
 {
     [SerializeField] private SceneAsset gameScene;
+    [SerializeField] private SceneAsset mainMenuScene;
     [SerializeField] private Canvas bodySettingsMenu;
     [SerializeField] private Slider playerHeight;
     [SerializeField] private TextMeshProUGUI heightText;
 
     private void Update()
     {
-        if (bodySettingsMenu != null && bodySettingsMenu.isActiveAndEnabled)
+        if (bodySettingsMenu != null && bodySettingsMenu.isActiveAndEnabled &&
+            playerHeight  != null && heightText != null)
         {
             heightText.text = playerHeight.value.ToString();
         }
