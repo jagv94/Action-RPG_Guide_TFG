@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
-public class Graphics : MonoBehaviour
+public class Graphics : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
     // Calidad
     public TMP_Text qualityText;
@@ -38,6 +39,9 @@ public class Graphics : MonoBehaviour
     public TMP_Text occlusionCullingText;
     private bool occlusionCullingEnabled = true;
 
+    private bool isAdjustingBrightness = false;
+    private bool isAdjustingContrast = false;
+
     void Start()
     {
         LoadSettings();
@@ -58,18 +62,15 @@ public class Graphics : MonoBehaviour
     {
         RenderSettings.ambientIntensity = brightnessSlider.value / brightnessSlider.maxValue;
         PlayerPrefs.SetFloat("Brightness", brightnessSlider.value);
-        brightnessText.text = brightnessSlider.value.ToString();
-        UserEventLogger.Instance.LogEvent("brightness_changed", brightnessText.text);
+        brightnessText.text = brightnessSlider.value.ToString("F0");
     }
 
     // === CONTRASTE ===
     public void OnContrastChanged()
     {
-        // Simulación de contraste (en shaders o postprocesado sería lo real)
         Shader.SetGlobalFloat("_Contrast", contrastSlider.value / contrastSlider.maxValue);
         PlayerPrefs.SetFloat("Contrast", contrastSlider.value);
-        contrastText.text = contrastSlider.value.ToString();
-        UserEventLogger.Instance.LogEvent("contrast_changed", contrastText.text);
+        contrastText.text = contrastSlider.value.ToString("F0");
     }
 
     // === DISTANCIA DE RENDERIZADO ===
@@ -104,7 +105,6 @@ public class Graphics : MonoBehaviour
     public void ChangeFoveatedRendering(int direction)
     {
         foveatedIndex = Mathf.Clamp(foveatedIndex + direction, 0, foveatedOptions.Length - 1);
-        // Simulación de Foveated Rendering (implementación real depende del SDK)
         UpdateUI();
         UserEventLogger.Instance.LogEvent("foveated_rendering_changed", foveatedRenderingText.text);
     }
@@ -116,6 +116,33 @@ public class Graphics : MonoBehaviour
         Camera.main.useOcclusionCulling = occlusionCullingEnabled;
         UpdateUI();
         UserEventLogger.Instance.LogEvent("occlusion_culling_changed", occlusionCullingEnabled.ToString());
+    }
+
+    // === EVENTOS DE POINTER ===
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (eventData.pointerEnter == brightnessSlider.gameObject)
+        {
+            isAdjustingBrightness = true;
+        }
+        else if (eventData.pointerEnter == contrastSlider.gameObject)
+        {
+            isAdjustingContrast = true;
+        }
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (isAdjustingBrightness)
+        {
+            UserEventLogger.Instance.LogEvent("brightness_changed", brightnessText.text);
+            isAdjustingBrightness = false;
+        }
+        if (isAdjustingContrast)
+        {
+            UserEventLogger.Instance.LogEvent("contrast_changed", contrastText.text);
+            isAdjustingContrast = false;
+        }
     }
 
     // === ACTUALIZAR INTERFAZ ===
@@ -135,26 +162,14 @@ public class Graphics : MonoBehaviour
         qualityIndex = PlayerPrefs.GetInt("Quality", 2);
         QualitySettings.SetQualityLevel(qualityIndex);
 
-        float brightness = PlayerPrefs.GetFloat("Brightness", 50);
-        brightnessSlider.value = brightness;
-        RenderSettings.ambientIntensity = brightness / 100f;
-
-        float contrast = PlayerPrefs.GetFloat("Contrast", 50);
-        contrastSlider.value = contrast;
-        Shader.SetGlobalFloat("_Contrast", contrast / 100f);
+        brightnessSlider.value = PlayerPrefs.GetFloat("Brightness", 50);
+        contrastSlider.value = PlayerPrefs.GetFloat("Contrast", 50);
 
         renderDistanceIndex = PlayerPrefs.GetInt("RenderDistance", 2);
-        Camera.main.farClipPlane = new float[] { 50f, 150f, 300f }[renderDistanceIndex];
-
         shadowQualityIndex = PlayerPrefs.GetInt("ShadowQuality", 2);
-        QualitySettings.shadowResolution = (ShadowResolution)shadowQualityIndex;
-
         reflectionsEnabled = PlayerPrefs.GetInt("Reflections", 1) == 1;
-        QualitySettings.realtimeReflectionProbes = reflectionsEnabled;
-
         foveatedIndex = PlayerPrefs.GetInt("Foveated", 0);
         occlusionCullingEnabled = PlayerPrefs.GetInt("OcclusionCulling", 1) == 1;
-        Camera.main.useOcclusionCulling = occlusionCullingEnabled;
     }
 
     public void SaveSettings()

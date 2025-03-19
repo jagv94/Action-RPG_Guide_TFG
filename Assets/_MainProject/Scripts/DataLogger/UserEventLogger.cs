@@ -25,7 +25,13 @@ public class UserEventLogger : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
 
-            UserID = IDGenerator.GenerateUserID();
+            UserID = PlayerPrefs.GetString("UserID", "");
+            if (UserID == "")
+            {
+                UserID = IDGenerator.GenerateUserID();
+                PlayerPrefs.SetString("UserID", UserID.ToString());
+            }
+
             SessionID = Guid.NewGuid().ToString();
         }
         else
