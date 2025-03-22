@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion.Comfort;
@@ -17,11 +18,14 @@ public class Locomotion : MonoBehaviour
     }
 
     public MovementMode currentMode;
+    public TextMeshProUGUI movementText;
+    [SerializeField] private float teleportSpeed = 5f;
 
     private ContinuousMoveProvider continuousMove;
     private TeleportationProvider teleportation;
     private XROrigin xrOrigin;
     private TunnelingVignetteController vignette;
+    private CustomXRInteractorLineVisual customLineVisual;
 
     private void Awake()
     {
@@ -29,6 +33,7 @@ public class Locomotion : MonoBehaviour
         teleportation = FindFirstObjectByType<TeleportationProvider>();
         xrOrigin = FindFirstObjectByType<XROrigin>();
         vignette = FindFirstObjectByType<TunnelingVignetteController>();
+        customLineVisual = FindFirstObjectByType<CustomXRInteractorLineVisual>();
     }
 
     private void Start()
@@ -63,61 +68,71 @@ public class Locomotion : MonoBehaviour
 
     private void SetHybridMode()
     {
+        movementText.SetText("Hibrido");
         continuousMove.enabled = true;
-        teleportation.enabled = true;
+        if (teleportation != null) teleportation.enabled = true;
         Debug.Log("Modo híbrido activado");
     }
 
     private void SetTeleportationMode()
     {
+        movementText.SetText("Teletransporte");
         continuousMove.enabled = false;
-        teleportation.enabled = true;
+        if (teleportation != null) teleportation.enabled = true;
         Debug.Log("Modo teletransporte activado");
     }
 
     private void SetSmoothTeleportationMode()
     {
+        movementText.SetText("Teletransporte Suave");
         continuousMove.enabled = false;
-        teleportation.enabled = false;
+        if (teleportation != null) teleportation.enabled = false;
 
-        Vector3 targetPosition = new Vector3(0, 0, 5); // Ejemplo
-        StartCoroutine(SmoothTeleport(targetPosition));
+        Vector3 targetPosition = GetTeleportTarget();
+        if (targetPosition != Vector3.zero)
+        {
+            StartCoroutine(SmoothTeleport(targetPosition));
+        }
     }
 
     private IEnumerator SmoothTeleport(Vector3 targetPosition)
     {
-        float duration = 0.5f;
-        float elapsedTime = 0;
+        float elapsedTime = 0f;
+        float distance = Vector3.Distance(xrOrigin.transform.position, targetPosition);
+        float duration = distance / teleportSpeed; // Ajustar duración en base a la velocidad
+
         Vector3 startPosition = xrOrigin.transform.position;
 
         while (elapsedTime < duration)
         {
-            xrOrigin.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            float t = elapsedTime / duration;
+            xrOrigin.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        xrOrigin.transform.position = targetPosition;
+        xrOrigin.transform.position = targetPosition; // Asegurar la posición final exacta
     }
 
     private void SetContinuousMode()
     {
+        movementText.SetText("Locomoción Continua");
         continuousMove.enabled = true;
-        teleportation.enabled = false;
+        if (teleportation != null) teleportation.enabled = false;
         Debug.Log("Modo continuo activado");
     }
 
     // Teletransporte con parpadeo
     private void SetBlinkTeleportationMode()
     {
+        movementText.SetText("Teletransporte Fundido");
         continuousMove.enabled = false;
-        teleportation.enabled = false;
+        if (teleportation != null) teleportation.enabled = true;
 
-        Vector3 targetPosition = new Vector3(0, 0, 5); // Ejemplo
-        StartCoroutine(BlinkTeleport(targetPosition));
+        StartCoroutine(BlinkTeleport());
     }
 
-    private IEnumerator BlinkTeleport(Vector3 targetPosition)
+    private IEnumerator BlinkTeleport()
     {
         if (vignette == null)
         {
@@ -125,12 +140,10 @@ public class Locomotion : MonoBehaviour
             yield break;
         }
 
-        // Oscurecer pantalla (cerrar viñeta)
-        Debug.Log("Oscureciendo pantalla...");
         float duration = 0.3f;
         float elapsedTime = 0;
         float startAperture = vignette.currentParameters.apertureSize;
-        float targetAperture = 0f; // Oscurecer completamente
+        float targetAperture = 0f;
 
         while (elapsedTime < duration)
         {
@@ -141,16 +154,22 @@ public class Locomotion : MonoBehaviour
 
         vignette.defaultParameters.apertureSize = targetAperture;
 
-        // Teletransporte
-        xrOrigin.transform.position = targetPosition;
+        Vector3 targetPosition = GetTeleportTarget();
+        if (targetPosition != Vector3.zero)
+        {
+            TeleportRequest request = new TeleportRequest()
+            {
+                destinationPosition = targetPosition,
+                matchOrientation = MatchOrientation.None
+            };
+            teleportation.QueueTeleportRequest(request);
+        }
 
         yield return new WaitForSeconds(0.1f);
 
-        // Desvanecer (abrir viñeta)
-        Debug.Log("Desvaneciendo pantalla...");
         elapsedTime = 0;
         startAperture = vignette.defaultParameters.apertureSize;
-        targetAperture = 1f; // Abrir completamente
+        targetAperture = 1f;
 
         while (elapsedTime < duration)
         {
@@ -162,8 +181,20 @@ public class Locomotion : MonoBehaviour
         vignette.defaultParameters.apertureSize = targetAperture;
     }
 
-    public void OnModeChange(int mode)
+    public Vector3 GetTeleportTarget()
     {
-        SetMovementMode((MovementMode)mode);
+        Vector3 targetPosition = Vector3.zero;
+        if (customLineVisual != null && customLineVisual.GetTeleportTarget(out targetPosition))
+        {
+            return targetPosition;
+        }
+        return Vector3.zero;
+    }
+
+    public void OnMovementModeChange(int direction)
+    {
+        int modeCount = System.Enum.GetValues(typeof(MovementMode)).Length;
+        int newMode = ((int)currentMode + direction + modeCount) % modeCount;
+        SetMovementMode((MovementMode)newMode);
     }
 }
