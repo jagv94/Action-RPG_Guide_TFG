@@ -13,14 +13,13 @@ public class Locomotion : MonoBehaviour
     public TextMeshProUGUI movementText;
     private ContinuousMoveProvider continuousMove;
     private TeleportationProvider teleportationProvider;
-    private XRRayInteractor teleportInteractor;
+    [SerializeField] private XRRayInteractor teleportInteractor;
     private XRInteractorLineVisual lineVisual;
 
     private void Awake()
     {
         continuousMove = FindFirstObjectByType<ContinuousMoveProvider>();
         teleportationProvider = FindFirstObjectByType<TeleportationProvider>();
-        teleportInteractor = FindTeleportInteractor();
 
         if (teleportInteractor != null)
         {
@@ -88,24 +87,6 @@ public class Locomotion : MonoBehaviour
                 lineVisual.enabled = isEnabled; // Muestra u oculta la línea predictiva
             }
         }
-    }
-
-    private XRRayInteractor FindTeleportInteractor()
-    {
-        // Busca todos los XRRayInteractors en la escena
-        XRRayInteractor[] interactors = FindObjectsByType<XRRayInteractor>(FindObjectsSortMode.None);
-
-        // Devuelve el primero que tenga la funcionalidad de teletransporte habilitada
-        foreach (XRRayInteractor interactor in interactors)
-        {
-            if (interactor.allowSelect)
-            {
-                return interactor;
-            }
-        }
-
-        // Si no se encuentra ninguno, devuelve null
-        return null;
     }
 
     public void OnMovementModeChange(int direction)

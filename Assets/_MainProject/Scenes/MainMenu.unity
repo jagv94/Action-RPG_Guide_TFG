@@ -1596,6 +1596,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1789333383 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2449787133337329425, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 921687135}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6803edce0201f574f923fd9d10e5b30a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1856313457
 GameObject:
   m_ObjectHideFlags: 0
@@ -57663,6 +57674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentMode: 0
   movementText: {fileID: 4796967005586329788}
+  teleportInteractor: {fileID: 1789333383}
 --- !u!114 &8845456091430056117
 MonoBehaviour:
   m_ObjectHideFlags: 0
