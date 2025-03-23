@@ -16805,6 +16805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4906506978016899122}
   - component: {fileID: 7820881206910709699}
+  - component: {fileID: 7820881206910709700}
   - component: {fileID: 7820881206910709698}
   - component: {fileID: 4097107815820777515}
   - component: {fileID: 64672534176012214}
@@ -21174,6 +21175,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 2476127292164788260}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7820881206910709700}
+        m_TargetAssemblyTypeName: Locomotion, Assembly-CSharp
+        m_MethodName: OnMovementModeChange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: -1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -54949,6 +54962,20 @@ MonoBehaviour:
   - {fileID: 8670924599744482773}
   settingsManager: {fileID: 64672534176012214}
   menuKey: {fileID: 183180807509118229, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+--- !u!114 &7820881206910709700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799101863644185491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b86d48cc8bef6744d97a36a81750e422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMode: 0
+  movementText: {fileID: 9103710257654826832}
 --- !u!224 &7821665023458612175
 RectTransform:
   m_ObjectHideFlags: 0
@@ -58772,6 +58799,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 8367276920380552552}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7820881206910709700}
+        m_TargetAssemblyTypeName: Locomotion, Assembly-CSharp
+        m_MethodName: OnMovementModeChange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
