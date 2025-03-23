@@ -1,8 +1,9 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.XR.Interaction.Toolkit.Locomotion.Movement;
 using TMPro;
-using UnityEngine.XR.Interaction.Toolkit.Inputs;
+using UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using UnityEngine.XR.Interaction.Toolkit.Locomotion.Teleportation;
+using UnityEngine.XR.Interaction.Toolkit.Locomotion.Movement;
 
 public class Locomotion : MonoBehaviour
 {
@@ -11,20 +12,23 @@ public class Locomotion : MonoBehaviour
     public MovementMode currentMode;
     public TextMeshProUGUI movementText;
     private ContinuousMoveProvider continuousMove;
-
-    [SerializeField] private InputActionManager inputActionManager;
-    private InputAction teleportAction;
+    private TeleportationProvider teleportationProvider;
+    [SerializeField] private XRRayInteractor teleportInteractor;
+    private XRInteractorLineVisual lineVisual;
 
     private void Awake()
     {
         continuousMove = FindFirstObjectByType<ContinuousMoveProvider>();
+        teleportationProvider = FindFirstObjectByType<TeleportationProvider>();
 
+        if (teleportInteractor != null)
+        {
+            lineVisual = teleportInteractor.GetComponent<XRInteractorLineVisual>();
+        }
     }
 
     private void Start()
     {
-        // Obtener la acción de teletransporte desde el InputActionManager
-        teleportAction = inputActionManager.actionAssets[0].FindAction("XRI Right Locomotion/Teleport Mode");
         SetMovementMode(currentMode);
     }
 
@@ -50,21 +54,39 @@ public class Locomotion : MonoBehaviour
     {
         movementText.SetText("Híbrido");
         continuousMove.enabled = true;
-        teleportAction.Enable(); // Habilitar teletransporte
+        EnableTeleportation(true);
     }
 
     private void SetTeleportationMode()
     {
         movementText.SetText("Teletransporte");
         continuousMove.enabled = false;
-        teleportAction.Enable(); // Habilitar teletransporte
+        EnableTeleportation(true);
     }
 
     private void SetContinuousMode()
     {
         movementText.SetText("Locomoción Continua");
         continuousMove.enabled = true;
-        teleportAction.Disable(); // Deshabilitar teletransporte
+        EnableTeleportation(false);
+    }
+
+    private void EnableTeleportation(bool isEnabled)
+    {
+        if (teleportationProvider != null)
+        {
+            teleportationProvider.enabled = isEnabled;
+        }
+
+        if (teleportInteractor != null)
+        {
+            teleportInteractor.allowSelect = isEnabled; // Permite o impide la selección de áreas de teletransporte
+
+            if (lineVisual != null)
+            {
+                lineVisual.enabled = isEnabled; // Muestra u oculta la línea predictiva
+            }
+        }
     }
 
     public void OnMovementModeChange(int direction)
