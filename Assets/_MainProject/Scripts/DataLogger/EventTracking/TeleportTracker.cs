@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TeleportTracker : MonoBehaviour
 {
+    public InputActionReference teleportAction;
     public static TeleportTracker Instance { get; private set; }
     public int TeleportCount { get; private set; } = 0;
 
@@ -15,6 +17,14 @@ public class TeleportTracker : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        if (teleportAction.action.WasPressedThisFrame())
+        {
+            RegisterTeleport();
         }
     }
 
