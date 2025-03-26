@@ -6473,20 +6473,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
---- !u!114 &64672534176012214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1799101863644185491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bcac93b2f040b94ca7c85c94c5695ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  graphicsSettings: {fileID: 7820881206910709698}
-  optimizationSettings: {fileID: 4097107815820777515}
 --- !u!224 &67531613304522851
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16796,7 +16782,6 @@ GameObject:
   - component: {fileID: 7820881206910709700}
   - component: {fileID: 7820881206910709698}
   - component: {fileID: 4097107815820777515}
-  - component: {fileID: 64672534176012214}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged

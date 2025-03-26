@@ -23476,7 +23476,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 7114671892400648485}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: SaveAllSettings
         m_Mode: 1
@@ -46245,18 +46245,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &7114671892400648485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8840028043292927232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bcac93b2f040b94ca7c85c94c5695ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7120121641825329630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56353,7 +56341,6 @@ GameObject:
   - component: {fileID: 8840028043292927233}
   - component: {fileID: 1067631505255614801}
   - component: {fileID: 6521914771956006584}
-  - component: {fileID: 7114671892400648485}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
