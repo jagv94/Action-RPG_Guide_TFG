@@ -4870,6 +4870,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487459554}
   m_CullTransparentMesh: 0
+--- !u!114 &1488964980 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1178791450436251564, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 921687135}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0cb9aa70a22847b5925ee5f067c10a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1498559193
 GameObject:
   m_ObjectHideFlags: 0
@@ -12091,6 +12102,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 1068800233938235125}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7820881206910709700}
+        m_TargetAssemblyTypeName: Locomotion, Assembly-CSharp
+        m_MethodName: OnHeightModeChange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -29707,7 +29730,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -388}
+  m_AnchoredPosition: {x: 400, y: -418}
   m_SizeDelta: {x: 520, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &3882805995705888606
@@ -32575,7 +32598,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 420, y: -399.5}
+  m_AnchoredPosition: {x: 420, y: -1159.5}
   m_SizeDelta: {x: 800, y: 775}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4327704376339150835
@@ -33673,7 +33696,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -148}
+  m_AnchoredPosition: {x: 400, y: -178}
   m_SizeDelta: {x: 520, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4477311326128378904
@@ -41076,6 +41099,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7820881206910709700}
+        m_TargetAssemblyTypeName: Locomotion, Assembly-CSharp
+        m_MethodName: OnHeightModeChange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: -1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5659037992388827114
 GameObject:
   m_ObjectHideFlags: 0
@@ -44501,7 +44536,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -448}
+  m_AnchoredPosition: {x: 400, y: -478}
   m_SizeDelta: {x: 520, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &6219090255960480786
@@ -47835,7 +47870,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -268}
+  m_AnchoredPosition: {x: 400, y: -298}
   m_SizeDelta: {x: 520, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6670398272982723443
@@ -48038,13 +48073,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 248394681848679931}
   m_HandleRect: {fileID: 6639581507889473236}
   m_Direction: 0
-  m_MinValue: 80
-  m_MaxValue: 250
+  m_MinValue: 0.5
+  m_MaxValue: 2
   m_WholeNumbers: 0
-  m_Value: 170
+  m_Value: 2
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7820881206910709700}
+        m_TargetAssemblyTypeName: Locomotion, Assembly-CSharp
+        m_MethodName: UpdateHeight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6705824841238232636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54361,7 +54408,6 @@ MonoBehaviour:
   - {fileID: 6195384634332216406}
   - {fileID: 3055845414568757325}
   - {fileID: 8670924599744482773}
-  settingsManager: {fileID: 64672534176012214}
   menuKey: {fileID: 183180807509118229, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!114 &7820881206910709700
 MonoBehaviour:
@@ -54380,6 +54426,11 @@ MonoBehaviour:
   speedText: {fileID: 4648625704939863868}
   restrictionText: {fileID: 6148235270327100810}
   rotationText: {fileID: 1276203825183178797}
+  heightText: {fileID: 6041954286648290852}
+  heightCmText: {fileID: 6705824841238232636}
+  xrOrigin: {fileID: 1488964980}
+  heightSliderPanel: {fileID: 4555007581495183816}
+  heightSlider: {fileID: 6695509959438300398}
   teleportInteractor: {fileID: 241647681}
 --- !u!224 &7821665023458612175
 RectTransform:
@@ -56591,7 +56642,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -208}
+  m_AnchoredPosition: {x: 400, y: -238}
   m_SizeDelta: {x: 520, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8139639126145551332
@@ -58043,7 +58094,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -328}
+  m_AnchoredPosition: {x: 400, y: -358}
   m_SizeDelta: {x: 520, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8361552138153970087
@@ -61702,18 +61753,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 8898518834020843402}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 64672534176012214}
-        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
-        m_MethodName: SaveAllSettings
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

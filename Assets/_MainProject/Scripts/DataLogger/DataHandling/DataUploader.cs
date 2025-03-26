@@ -77,7 +77,7 @@ public class DataUploader : MonoBehaviour
 
         string jsonData = JsonConvert.SerializeObject(new BasicEventQueueWrapper { events = basicData });
         string timestamp = DateTime.UtcNow.ToString("yyyyMMddTHHmmssfffZ");
-        string path = $"userEvents/{UserEventLogger.Instance.UserID}/{UserEventLogger.Instance.SessionID}/{timestamp}.json";
+        string path = $"userEvents/{UserEventLogger.Instance.UserID}/{UserEventLogger.Instance.SessionID}.json";
 
         bool success = await TrySendDataAsync(path, jsonData);
 

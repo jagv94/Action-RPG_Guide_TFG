@@ -3,27 +3,22 @@ using TMPro;
 
 public class Optimization : MonoBehaviour
 {
-    // Framerate
     public TMP_Text frameRateText;
     private readonly int[] framerates = { 75, 90, 120 };
-    private int frameRateIndex = 1;
+    private int frameRateIndex;
 
-    // Resolución dinámica
     public TMP_Text dynamicResolutionText;
-    private bool dynamicResolutionEnabled = true;
+    private bool dynamicResolutionEnabled;
 
-    // Carga de texturas
     public TMP_Text textureQualityText;
     private readonly string[] textureOptions = { "Equilibrada", "Alta Calidad", "Optimizada" };
-    private int textureQualityIndex = 0;
+    private int textureQualityIndex;
 
-    // Partículas
     public TMP_Text particleLimitText;
-    private bool particleLimitEnabled = false;
+    private bool particleLimitEnabled;
 
-    // Reducción de postprocesado
     public TMP_Text postProcessingText;
-    private bool postProcessingReduced = false;
+    private bool postProcessingReduced;
 
     void Start()
     {
@@ -31,34 +26,33 @@ public class Optimization : MonoBehaviour
         UpdateUI();
     }
 
-    // === FRAMERATE ===
     public void ChangeFramerate(int direction)
     {
         frameRateIndex = Mathf.Clamp(frameRateIndex + direction, 0, framerates.Length - 1);
         Application.targetFrameRate = framerates[frameRateIndex];
+        PlayerPrefs.SetInt("Framerate", frameRateIndex);
+        PlayerPrefs.Save();
         UpdateUI();
-        UserEventLogger.Instance.LogEvent("framerate_changed", frameRateText.text);
     }
 
-    // === RESOLUCIÓN DINÁMICA ===
     public void ToggleDynamicResolution()
     {
         dynamicResolutionEnabled = !dynamicResolutionEnabled;
         ScalableBufferManager.ResizeBuffers(dynamicResolutionEnabled ? 1f : 0.75f, dynamicResolutionEnabled ? 1f : 0.75f);
+        PlayerPrefs.SetInt("DynamicResolution", dynamicResolutionEnabled ? 1 : 0);
+        PlayerPrefs.Save();
         UpdateUI();
-        UserEventLogger.Instance.LogEvent("dynamic_resolution_changed", dynamicResolutionEnabled.ToString());
     }
 
-    // === CARGA DE TEXTURAS ===
     public void ChangeTextureQuality(int direction)
     {
         textureQualityIndex = Mathf.Clamp(textureQualityIndex + direction, 0, textureOptions.Length - 1);
         QualitySettings.globalTextureMipmapLimit = textureQualityIndex == 2 ? 2 : textureQualityIndex == 1 ? 0 : 1;
+        PlayerPrefs.SetInt("TextureQuality", textureQualityIndex);
+        PlayerPrefs.Save();
         UpdateUI();
-        UserEventLogger.Instance.LogEvent("texture_quality_changed", textureQualityText.text);
     }
 
-    // === LIMITACIÓN DE PART�CULAS ===
     public void ToggleParticleLimit()
     {
         particleLimitEnabled = !particleLimitEnabled;
@@ -68,11 +62,11 @@ public class Optimization : MonoBehaviour
             var main = particle.main;
             main.maxParticles = particleLimitEnabled ? 200 : 1000;
         }
+        PlayerPrefs.SetInt("ParticleLimit", particleLimitEnabled ? 1 : 0);
+        PlayerPrefs.Save();
         UpdateUI();
-        UserEventLogger.Instance.LogEvent("particle_limit_changed", particleLimitEnabled.ToString());
     }
 
-    // === REDUCCIÓN DE POSTPROCESADO ===
     public void TogglePostProcessingReduction()
     {
         postProcessingReduced = !postProcessingReduced;
@@ -81,21 +75,20 @@ public class Optimization : MonoBehaviour
         {
             postProcessingVolume.enabled = !postProcessingReduced;
         }
+        PlayerPrefs.SetInt("PostProcessing", postProcessingReduced ? 1 : 0);
+        PlayerPrefs.Save();
         UpdateUI();
-        UserEventLogger.Instance.LogEvent("post_processing_changed", postProcessingReduced.ToString());
     }
 
-    // === ACTUALIZAR INTERFAZ ===
     void UpdateUI()
     {
         frameRateText.text = $"{framerates[frameRateIndex]}Hz";
         dynamicResolutionText.text = dynamicResolutionEnabled ? "Activado" : "Desactivado";
         textureQualityText.text = textureOptions[textureQualityIndex];
-        particleLimitText.text = particleLimitEnabled ? "S�" : "No";
-        postProcessingText.text = postProcessingReduced ? "S�" : "No";
+        particleLimitText.text = particleLimitEnabled ? "Sí" : "No";
+        postProcessingText.text = postProcessingReduced ? "Sí" : "No";
     }
 
-    // === GUARDAR Y CARGAR AJUSTES ===
     void LoadSettings()
     {
         frameRateIndex = PlayerPrefs.GetInt("Framerate", 1);
@@ -108,22 +101,12 @@ public class Optimization : MonoBehaviour
         QualitySettings.globalTextureMipmapLimit = textureQualityIndex == 2 ? 2 : textureQualityIndex == 1 ? 0 : 1;
 
         particleLimitEnabled = PlayerPrefs.GetInt("ParticleLimit", 0) == 1;
-
         postProcessingReduced = PlayerPrefs.GetInt("PostProcessing", 0) == 1;
+
         var postProcessingVolume = FindFirstObjectByType<UnityEngine.Rendering.Volume>();
         if (postProcessingVolume != null)
         {
             postProcessingVolume.enabled = !postProcessingReduced;
         }
-    }
-
-    public void SaveSettings()
-    {
-        PlayerPrefs.SetInt("Framerate", frameRateIndex);
-        PlayerPrefs.SetInt("DynamicResolution", dynamicResolutionEnabled ? 1 : 0);
-        PlayerPrefs.SetInt("TextureQuality", textureQualityIndex);
-        PlayerPrefs.SetInt("ParticleLimit", particleLimitEnabled ? 1 : 0);
-        PlayerPrefs.SetInt("PostProcessing", postProcessingReduced ? 1 : 0);
-        PlayerPrefs.Save();
     }
 }

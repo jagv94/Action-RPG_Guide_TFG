@@ -10,7 +10,6 @@ public class VRMenuManager_Game : MonoBehaviour
     [SerializeField] private SceneAsset mainMenuScene;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private List<GameObject> pauseSubMenu;
-    [SerializeField] private SettingsManager settingsManager;
     public InputActionReference menuKey;
 
     private void OpenMenu()
@@ -32,10 +31,6 @@ public class VRMenuManager_Game : MonoBehaviour
                         submenu.SetActive(false);
                     }
                 }
-            }
-            else
-            {
-                settingsManager.SaveAllSettings();
             }
         }
     }
