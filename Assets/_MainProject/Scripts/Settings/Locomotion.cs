@@ -321,6 +321,8 @@ public class Locomotion : MonoBehaviour
     {
         if (xrOrigin != null)
         {
+            // Por lo visto, XRI no permite cambiar el valor por que lo controla automáticamente.
+            // Quizá haya que hacer un override de la función que lo detecta, para que deje hacerlo manual.
             xrOrigin.CameraYOffset = value;
             UpdateHeightText(value);
 
