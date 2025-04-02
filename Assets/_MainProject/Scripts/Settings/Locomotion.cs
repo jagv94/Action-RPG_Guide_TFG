@@ -17,7 +17,6 @@ public class Locomotion : MonoBehaviour
     private enum MoveSpeedLevel { Slow = 0, Medium = 1, Fast = 2 }
     private enum RotationMode { Disabled = 0, Snap = 1 }
     private enum VignetteRestrictionLevel { Disabled = 0, Low = 1, Medium = 2, High = 3 }
-    private enum HeightMode { Automatic = 0, Manual = 1 }
 
     private readonly float[] speedValues = { 1.5f, 2.5f, 4f };
     private readonly float[] restrictionValues = { 1.0f, 0.75f, 0.7f, 0.65f };
@@ -27,18 +26,11 @@ public class Locomotion : MonoBehaviour
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI restrictionText;
     public TextMeshProUGUI rotationText;
-    public TextMeshProUGUI heightText;
-    public TextMeshProUGUI heightCmText;
-
-    [SerializeField] private XROrigin xrOrigin;
-    [SerializeField] private GameObject heightSliderPanel;
-    [SerializeField] private Slider heightSlider;
 
     private MovementMode currentMode;
     private MoveSpeedLevel currentSpeedLevel;
     private VignetteRestrictionLevel currentRestrictionLevel;
     private RotationMode currentRotationMode;
-    private HeightMode currentHeightMode;
 
     private ContinuousMoveProvider continuousMove;
     private DynamicMoveProvider dynamicMoveProvider;
@@ -76,23 +68,6 @@ public class Locomotion : MonoBehaviour
 
         currentRotationMode = (RotationMode)PlayerPrefs.GetInt("RotationMode", 1);
         SetRotationMode(currentRotationMode);
-
-        currentHeightMode = (HeightMode)PlayerPrefs.GetInt("HeightMode", (int)HeightMode.Automatic);
-        SetHeightMode(currentHeightMode);
-
-        float savedHeight = PlayerPrefs.GetFloat("ManualHeight", xrOrigin.CameraYOffset);
-        heightSlider.value = Mathf.Clamp(savedHeight, 0.5f, 2f);
-        UpdateHeightText(savedHeight);
-        UpdateHeight(savedHeight);
-    }
-
-    private void Update()
-    {
-        if (currentHeightMode == HeightMode.Automatic)
-        {
-            AutoDetectHeight();
-            UpdateHeightText(xrOrigin.CameraYOffset);
-        }
     }
 
 #region MovementMode
@@ -270,82 +245,4 @@ public class Locomotion : MonoBehaviour
         SetRotationMode(modes[newIndex]);
     }
 #endregion CameraRotation
-
-#region PlayerHeight
-    private void SetHeightMode(HeightMode mode)
-    {
-        currentHeightMode = mode;
-
-        switch (mode)
-        {
-            case HeightMode.Automatic:
-                heightSliderPanel.SetActive(false);
-                AutoDetectHeight(); // Detectar altura automáticamente
-                heightText.SetText("Automático");
-                UpdateHeightText(xrOrigin.CameraYOffset);
-                break;
-            case HeightMode.Manual:
-                heightSliderPanel.SetActive(true);
-                heightText.SetText("Manual");
-
-                // Sincronizar el valor del slider con el valor real en metros
-                heightSlider.value = xrOrigin.CameraYOffset;
-
-                UpdateHeight(xrOrigin.CameraYOffset);
-                break;
-        }
-
-        // Guardar el valor en PlayerPrefs
-        PlayerPrefs.SetInt("HeightMode", (int)mode);
-        PlayerPrefs.Save();
-    }
-
-    private void AutoDetectHeight()
-    {
-        if (xrOrigin != null && xrOrigin.Camera != null)
-        {
-            // Detectar automáticamente la altura en metros
-            float detectedHeight = xrOrigin.Camera.transform.localPosition.y;
-
-            // Limitar el valor detectado a un rango razonable (por ejemplo, 0.5 m a 2 m)
-            detectedHeight = Mathf.Clamp(detectedHeight, 0.5f, 2f);
-
-            // Asignar el valor al XR Origin y sincronizar el slider
-            xrOrigin.CameraYOffset = detectedHeight;
-            heightSlider.value = detectedHeight; // Sincronizar valor real en metros
-            UpdateHeightText(detectedHeight);
-        }
-    }
-
-    public void UpdateHeight(float value)
-    {
-        if (xrOrigin != null)
-        {
-            // Por lo visto, XRI no permite cambiar el valor por que lo controla automáticamente.
-            // Quizá haya que hacer un override de la función que lo detecta, para que deje hacerlo manual.
-            xrOrigin.CameraYOffset = value;
-            UpdateHeightText(value);
-
-            PlayerPrefs.SetFloat("ManualHeight", value);
-            PlayerPrefs.Save();
-        }
-    }
-
-    private void UpdateHeightText(float value)
-    {
-        if (heightCmText != null)
-        {
-            int heightInCm = Mathf.RoundToInt(value * 100); // Convertir metros a cm
-            heightCmText.SetText($"{heightInCm} cm");
-        }
-    }
-
-    public void OnHeightModeChange(int direction)
-    {
-        var modes = (HeightMode[])Enum.GetValues(typeof(HeightMode));
-        int currentIndex = Array.IndexOf(modes, currentHeightMode);
-        int newIndex = (currentIndex + direction + modes.Length) % modes.Length;
-        SetHeightMode(modes[newIndex]);
-    }
-#endregion PlayerHeight
 }
