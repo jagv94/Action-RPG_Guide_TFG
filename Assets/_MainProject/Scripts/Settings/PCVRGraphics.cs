@@ -61,6 +61,7 @@ public class PCVRGraphicsSettings : MonoBehaviour
         LoadSettings();
         ApplySettings();
         UpdateUI();
+        ForceVolumeLayerMask();
     }
 
     private void InitializeSystem()
@@ -228,7 +229,7 @@ public class PCVRGraphicsSettings : MonoBehaviour
         {
             _colorAdjustments.postExposure.value = Mathf.Lerp(-1f, 1f, value / 100f);
             PlayerPrefs.SetFloat("Brightness", value);
-            brightnessText.text = value.ToString("F0");
+            brightnessText.text = value.ToString("F");
 
             ApplySettings();
         }
@@ -244,6 +245,12 @@ public class PCVRGraphicsSettings : MonoBehaviour
 
             ApplySettings();
         }
+    }
+
+    private void ForceVolumeLayerMask()
+    {
+        var cameraData = vrCamera.GetUniversalAdditionalCameraData();
+        cameraData.volumeLayerMask = LayerMask.GetMask("PostProcessing");
     }
     #endregion
 

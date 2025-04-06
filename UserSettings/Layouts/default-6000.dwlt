@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2048
     height: 1060.8
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Project
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 40
+  controlID: 109
   draggingID: 0
 --- !u!114 &3
 MonoBehaviour:
@@ -69,8 +69,8 @@ MonoBehaviour:
     y: 0
     width: 521.6
     height: 1004.80005
-  m_MinSize: {x: 276, y: 76}
-  m_MaxSize: {x: 4001, y: 4026}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -95,8 +95,8 @@ MonoBehaviour:
     y: 0
     width: 314.4
     height: 644.8
-  m_MinSize: {x: 201, y: 226}
-  m_MaxSize: {x: 4001, y: 4026}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -512,7 +512,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/_MainProject/Scenes
+    - Assets
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -522,16 +522,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/_MainProject/Scenes
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: E:\_Trabajo\Unity projects\Action-RPG_Guide_TFG
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 1abb0000
-    m_LastClickedID: 47898
-    m_ExpandedIDs: 000000009aba00009cba00009eba0000a0ba0000a2ba0000a4ba0000a6ba0000a8ba0000aaba0000acba0000aeba00001abb000030bb000000ca9a3b
+    m_SelectedIDs: a4ba0000
+    m_LastClickedID: 47780
+    m_ExpandedIDs: 00000000a4ba0000a6ba0000a8ba0000aaba0000acba0000aeba0000b0ba0000b2ba0000b4ba0000b6ba0000b8ba000024bb00003abb0000c80e0300ca0e030000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -560,7 +560,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000009aba00009cba00009eba0000a0ba0000a2ba0000a4ba0000a6ba0000a8ba0000aaba0000acba0000aeba0000
+    m_ExpandedIDs: 00000000a4ba0000a6ba0000a8ba0000aaba0000acba0000aeba0000b0ba0000b2ba0000b4ba0000b6ba0000b8ba0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -708,7 +708,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 20a9ffff00b7ffff88baffff8cd0ffff0afbffff1afbffff24a20000a2a2000058a30000c6a400009ca50000eaa70000cca90000eaac000030af0000e2af000030150100c644010006470100284b01007a4b010070500100e852010076a00100
+      m_ExpandedIDs: bc04ffffd412ffff8437ffff4e3bffff5c3bffff6445ffffda77ffffe877fffff277ffff8e81ffff9c81fffffc85ffffa0a1ffffaea1ffffb0a1ffff08a8ffff16a8ffffaeafffffbab2ffffc8b2ffffd2b2ffff12c0ffffcac3ffff26d1ffff7ce4ffff26f2ffff1afbfffff65b0100b25c0100605d01003e5e0100b4660100166c0100fe6e01003e71010060750100b2750100a87a0100207d0100fa4903003a4c03005c500300ae500300a45503001c580300bacf030076d0030024d1030002d2030078da0300dadf0300e8f503004afc03009cfc0300920104000a040400
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1437,7 +1437,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 724
-    width: 1526.2
+    width: 1525.4
     height: 334.00006
   m_SerializedDataModeController:
     m_DataMode: 0

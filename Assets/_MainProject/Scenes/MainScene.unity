@@ -3330,6 +3330,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1767192433, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503725, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_Name
       value: XR Origin (XR Rig)
@@ -3384,6 +3388,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6501755809687671949, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534966689092540292, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_RendererIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534966689092540292, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_RenderPostProcessing
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -16254,8 +16266,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 7486493554482736770}
   m_HandleRect: {fileID: 624386842527142821}
   m_Direction: 0
-  m_MinValue: -30
-  m_MaxValue: 30
+  m_MinValue: -100
+  m_MaxValue: 100
   m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
@@ -16393,7 +16405,7 @@ GameObject:
   - component: {fileID: 7820881206910709698}
   - component: {fileID: 4097107815820777515}
   - component: {fileID: 7820881206910709701}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MenuManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32258,10 +32270,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 7355733306928255576}
   m_HandleRect: {fileID: 2540891342400880942}
   m_Direction: 0
-  m_MinValue: -1
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 0
+  m_MinValue: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
+  m_Value: 50
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -51829,7 +51841,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 0}
+  sharedProfile: {fileID: 11400000, guid: 8edfdf530badbe9428b28defd14027db, type: 2}
 --- !u!224 &7821665023458612175
 RectTransform:
   m_ObjectHideFlags: 0
