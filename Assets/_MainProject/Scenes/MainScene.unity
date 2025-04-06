@@ -29817,7 +29817,7 @@ MonoBehaviour:
   textureQualityText: {fileID: 1050296175560610809}
   particleLimitText: {fileID: 8439053495697465637}
   postProcessingText: {fileID: 5209892103299975327}
-  postProcessingVolume: {fileID: 0}
+  postProcessingVolume: {fileID: 7820881206910709701}
 --- !u!224 &4098419054065922956
 RectTransform:
   m_ObjectHideFlags: 0
