@@ -28477,7 +28477,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6521914771956006584}
         m_TargetAssemblyTypeName: Optimization, Assembly-CSharp
-        m_MethodName: TogglePostProcessingReduction
+        m_MethodName: TogglePostProcessing
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -34104,7 +34104,7 @@ GameObject:
   - component: {fileID: 3346328387357527821}
   - component: {fileID: 4320242256136909366}
   m_Layer: 5
-  m_Name: PostProcess Limit Button
+  m_Name: PostProcess Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40905,7 +40905,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Reducci\xF3n de Efectos de Postprocesado"
+  m_text: Efectos de Postprocesado
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -41234,6 +41234,7 @@ MonoBehaviour:
   textureQualityText: {fileID: 3048999265272819580}
   particleLimitText: {fileID: 1216501321344459490}
   postProcessingText: {fileID: 4683814888200306802}
+  postProcessingVolume: {fileID: 8840028043292927234}
 --- !u!1 &6523002969994039554
 GameObject:
   m_ObjectHideFlags: 0
@@ -41792,7 +41793,7 @@ GameObject:
   - component: {fileID: 1085068512336141894}
   - component: {fileID: 4683814888200306802}
   m_Layer: 5
-  m_Name: Text (TMP) PostProcess Limit
+  m_Name: Text (TMP) PostProcess
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43949,7 +43950,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!224 &7098337678885143041
 RectTransform:
   m_ObjectHideFlags: 0

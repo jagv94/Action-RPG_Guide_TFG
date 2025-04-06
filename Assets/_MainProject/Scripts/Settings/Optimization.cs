@@ -1,28 +1,34 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.Rendering;
 
 public class Optimization : MonoBehaviour
 {
+    [Header("UI References")]
     public TMP_Text frameRateText;
+    public TMP_Text dynamicResolutionText;
+    public TMP_Text textureQualityText;
+    public TMP_Text particleLimitText;
+    public TMP_Text postProcessingText;
+
+    [Header("Post Processing Volume")]
+    public Volume postProcessingVolume; // Asignado desde el Inspector
+
     private readonly int[] framerates = { 75, 90, 120 };
     private int frameRateIndex;
 
-    public TMP_Text dynamicResolutionText;
     private bool dynamicResolutionEnabled;
 
-    public TMP_Text textureQualityText;
     private readonly string[] textureOptions = { "Equilibrada", "Alta Calidad", "Optimizada" };
     private int textureQualityIndex;
 
-    public TMP_Text particleLimitText;
     private bool particleLimitEnabled;
-
-    public TMP_Text postProcessingText;
-    private bool postProcessingReduced;
+    private bool isPostProcessingEnabled;
 
     void Start()
     {
         LoadSettings();
+        ApplySettings();
         UpdateUI();
     }
 
@@ -31,82 +37,112 @@ public class Optimization : MonoBehaviour
         frameRateIndex = Mathf.Clamp(frameRateIndex + direction, 0, framerates.Length - 1);
         Application.targetFrameRate = framerates[frameRateIndex];
         PlayerPrefs.SetInt("Framerate", frameRateIndex);
-        PlayerPrefs.Save();
-        UpdateUI();
+        SaveAndUpdate();
     }
 
     public void ToggleDynamicResolution()
     {
         dynamicResolutionEnabled = !dynamicResolutionEnabled;
-        ScalableBufferManager.ResizeBuffers(dynamicResolutionEnabled ? 1f : 0.75f, dynamicResolutionEnabled ? 1f : 0.75f);
+        float scale = dynamicResolutionEnabled ? 1f : 0.75f;
+        ScalableBufferManager.ResizeBuffers(scale, scale);
         PlayerPrefs.SetInt("DynamicResolution", dynamicResolutionEnabled ? 1 : 0);
-        PlayerPrefs.Save();
-        UpdateUI();
+        SaveAndUpdate();
     }
 
     public void ChangeTextureQuality(int direction)
     {
         textureQualityIndex = Mathf.Clamp(textureQualityIndex + direction, 0, textureOptions.Length - 1);
-        QualitySettings.globalTextureMipmapLimit = textureQualityIndex == 2 ? 2 : textureQualityIndex == 1 ? 0 : 1;
+        QualitySettings.globalTextureMipmapLimit = textureQualityIndex switch
+        {
+            0 => 1, // Equilibrada
+            1 => 0, // Alta Calidad
+            2 => 2, // Optimizada
+            _ => 1
+        };
         PlayerPrefs.SetInt("TextureQuality", textureQualityIndex);
-        PlayerPrefs.Save();
-        UpdateUI();
+        SaveAndUpdate();
     }
 
     public void ToggleParticleLimit()
     {
         particleLimitEnabled = !particleLimitEnabled;
         ParticleSystem[] particles = FindObjectsByType<ParticleSystem>(FindObjectsSortMode.None);
+
         foreach (var particle in particles)
         {
             var main = particle.main;
             main.maxParticles = particleLimitEnabled ? 200 : 1000;
+
+            if (particleLimitEnabled)
+                particle.Clear(); // Limpia exceso si se baja límite
         }
+
         PlayerPrefs.SetInt("ParticleLimit", particleLimitEnabled ? 1 : 0);
-        PlayerPrefs.Save();
-        UpdateUI();
+        SaveAndUpdate();
     }
 
-    public void TogglePostProcessingReduction()
+    public void TogglePostProcessing()
     {
-        postProcessingReduced = !postProcessingReduced;
-        var postProcessingVolume = FindFirstObjectByType<UnityEngine.Rendering.Volume>();
+        isPostProcessingEnabled = !isPostProcessingEnabled;
+
         if (postProcessingVolume != null)
         {
-            postProcessingVolume.enabled = !postProcessingReduced;
+            postProcessingVolume.enabled = isPostProcessingEnabled;
         }
-        PlayerPrefs.SetInt("PostProcessing", postProcessingReduced ? 1 : 0);
+
+        PlayerPrefs.SetInt("PostProcessing", isPostProcessingEnabled ? 1 : 0);
+        SaveAndUpdate();
+    }
+
+    private void SaveAndUpdate()
+    {
         PlayerPrefs.Save();
         UpdateUI();
     }
 
-    void UpdateUI()
+    private void UpdateUI()
     {
         frameRateText.text = $"{framerates[frameRateIndex]}Hz";
         dynamicResolutionText.text = dynamicResolutionEnabled ? "Activado" : "Desactivado";
         textureQualityText.text = textureOptions[textureQualityIndex];
         particleLimitText.text = particleLimitEnabled ? "Sí" : "No";
-        postProcessingText.text = postProcessingReduced ? "Sí" : "No";
+        postProcessingText.text = isPostProcessingEnabled ? "Activo" : "Desactivado";
     }
 
-    void LoadSettings()
+    private void LoadSettings()
     {
         frameRateIndex = PlayerPrefs.GetInt("Framerate", 1);
+        dynamicResolutionEnabled = PlayerPrefs.GetInt("DynamicResolution", 1) == 1;
+        textureQualityIndex = PlayerPrefs.GetInt("TextureQuality", 0);
+        particleLimitEnabled = PlayerPrefs.GetInt("ParticleLimit", 0) == 1;
+        isPostProcessingEnabled = PlayerPrefs.GetInt("PostProcessing", 1) == 1; // Activo por defecto
+    }
+
+    private void ApplySettings()
+    {
         Application.targetFrameRate = framerates[frameRateIndex];
 
-        dynamicResolutionEnabled = PlayerPrefs.GetInt("DynamicResolution", 1) == 1;
-        ScalableBufferManager.ResizeBuffers(dynamicResolutionEnabled ? 1f : 0.75f, dynamicResolutionEnabled ? 1f : 0.75f);
+        float scale = dynamicResolutionEnabled ? 1f : 0.75f;
+        ScalableBufferManager.ResizeBuffers(scale, scale);
 
-        textureQualityIndex = PlayerPrefs.GetInt("TextureQuality", 0);
-        QualitySettings.globalTextureMipmapLimit = textureQualityIndex == 2 ? 2 : textureQualityIndex == 1 ? 0 : 1;
+        QualitySettings.globalTextureMipmapLimit = textureQualityIndex switch
+        {
+            0 => 1,
+            1 => 0,
+            2 => 2,
+            _ => 1
+        };
 
-        particleLimitEnabled = PlayerPrefs.GetInt("ParticleLimit", 0) == 1;
-        postProcessingReduced = PlayerPrefs.GetInt("PostProcessing", 0) == 1;
-
-        var postProcessingVolume = FindFirstObjectByType<UnityEngine.Rendering.Volume>();
         if (postProcessingVolume != null)
         {
-            postProcessingVolume.enabled = !postProcessingReduced;
+            postProcessingVolume.enabled = isPostProcessingEnabled;
+        }
+
+        ParticleSystem[] particles = FindObjectsByType<ParticleSystem>(FindObjectsSortMode.None);
+        foreach (var particle in particles)
+        {
+            var main = particle.main;
+            main.maxParticles = particleLimitEnabled ? 200 : 1000;
         }
     }
 }
