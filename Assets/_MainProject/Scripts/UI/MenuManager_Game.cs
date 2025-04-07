@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 public class VRMenuManager_Game : MonoBehaviour
 {
-    [SerializeField] private SceneAsset gameScene;
     [SerializeField] private SceneAsset mainMenuScene;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private List<GameObject> pauseSubMenu;
@@ -14,7 +13,7 @@ public class VRMenuManager_Game : MonoBehaviour
 
     private void OpenMenu()
     {
-        if (SceneManager.GetActiveScene().name == gameScene.name && pauseMenu != null)
+        if (pauseMenu != null)
         {
             pauseMenu.SetActive(!pauseMenu.activeSelf);
 
