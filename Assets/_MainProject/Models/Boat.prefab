@@ -115,8 +115,8 @@ Transform:
   m_GameObject: {fileID: 767899123685034075}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.625, y: 0.736, z: 0.003}
-  m_LocalScale: {x: 0.7422, y: 1.7679, z: 0.7}
+  m_LocalPosition: {x: 0.848, y: 0.736, z: 0.003}
+  m_LocalScale: {x: 0.28493133, y: 1.7679, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4807478928032480699}
@@ -549,7 +549,7 @@ MonoBehaviour:
   destinationPoint: {fileID: 7607426306027088124}
   previewObject: {fileID: 4997497837707444033}
   triggerDetector: {fileID: 4002709726175373314}
-  moveSpeed: 5
+  moveSpeed: 7
 --- !u!1 &4795905220353729093
 GameObject:
   m_ObjectHideFlags: 0
