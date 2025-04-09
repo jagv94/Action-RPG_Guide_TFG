@@ -1,12 +1,24 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEditor;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 
 public class VRMenuManager_Game : MonoBehaviour
 {
-    [SerializeField] private SceneAsset mainMenuScene;
+    [SerializeField] private string mainMenuSceneName;
+
+#if UNITY_EDITOR
+    [SerializeField] private UnityEditor.SceneAsset mainMenuScene;
+
+    private void OnValidate()
+    {
+        if (mainMenuScene != null)
+        {
+            mainMenuSceneName = mainMenuScene.name;
+        }
+    }
+#endif
+
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private List<GameObject> pauseSubMenu;
     public InputActionReference menuKey;
@@ -21,7 +33,7 @@ public class VRMenuManager_Game : MonoBehaviour
             {
                 foreach (GameObject submenu in pauseSubMenu)
                 {
-                    if(submenu.name == "Inventory Menu" || submenu.name == "PM Buttons")
+                    if (submenu.name == "Inventory Menu" || submenu.name == "PM Buttons")
                     {
                         submenu.SetActive(true);
                     }
@@ -52,6 +64,6 @@ public class VRMenuManager_Game : MonoBehaviour
 
     public void MainMenu()
     {
-        SceneManager.LoadScene(mainMenuScene.name);
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 }
