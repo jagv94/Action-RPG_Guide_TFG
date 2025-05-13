@@ -48,6 +48,8 @@ Los resultados de estas pruebas, incluyendo el análisis del SSQ, SUS y feedback
 
 Nota: Con el fin de la realización del proyecto, la base de datos a la que apunta está desactivada y es probable que de errores por ello. Se recomienda desactivar el sistema de captura de datos permanentemente (desactivar el game object TrackingManager en la escena de menú (MainMenu) y la escena de juego (GameScene)) o añadir una base de datos activa para la captura (en el script FirebaseManager.cs).
 
+También puede descargarse la versión ya compilada, pero esta sigue internamente conectada a la base de datos (ya desactivada) y se desconoce si podría dar algún problema por ello.
+
 ## Enlace a la Memoria del TFG
 
 Para consultar la investigación completa, el diseño de la guía, la metodología detallada, los resultados de la validación y las conclusiones del proyecto, puedes acceder a la memoria del TFG completa una vez que esté publicada en el Dipòsit Digital de la Universitat de Barcelona.
