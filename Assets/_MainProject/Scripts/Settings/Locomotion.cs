@@ -63,7 +63,7 @@ public class Locomotion : MonoBehaviour
         currentSpeedLevel = (MoveSpeedLevel)PlayerPrefs.GetInt("SpeedLevel", 1); // Media por defecto
         SetMoveSpeed(currentSpeedLevel);
 
-        currentRestrictionLevel = (VignetteRestrictionLevel)PlayerPrefs.GetInt("RestrictionLevel", 0);
+        currentRestrictionLevel = (VignetteRestrictionLevel)PlayerPrefs.GetInt("RestrictionLevel", 2);
         SetRestrictionLevel(currentRestrictionLevel);
 
         currentRotationMode = (RotationMode)PlayerPrefs.GetInt("RotationMode", 1);
